@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Toadilicious/Beer-directory#readme",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "mongoose": "^4.9.6"
   }
 }
