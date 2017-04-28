@@ -1,0 +1,23 @@
+{
+  "name": "beer_directory",
+  "version": "1.0.0",
+  "description": "A directory in which you can search for beers and breweries.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Toadilicious/Beer-directory.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Toadilicious/Beer-directory/issues"
+  },
+  "homepage": "https://github.com/Toadilicious/Beer-directory#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
