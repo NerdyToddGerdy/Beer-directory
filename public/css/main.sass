@@ -4,26 +4,33 @@ body
    background: #494333
    margin: 0 auto
    font-family: 'Fredericka the Great', cursive
-   text-shadow: 1px 1px #7f6322
+   text-shadow: 1px 0px #7f6322
    text-align: center
-header
-   background: goldenrod
+   width: 100%
+   header
+      background: goldenrod
 
-nav
-   ul
-      display: flex
-      justify-content: space-between
-      flex-direction: row
-      li
-         list-style: none
+   .main-img
+      image-resolution:from-image
+      width: 100%
+      height: 1rem
+      position: relative
+      z-index: -1
+      margin: 0 auto
 
-         // margin: auto
-         a
-            text-decoration: none
-            color: $primary-color
-            margin: auto
-// font-family: 'Fredericka the Great', cursive;
-// font-family: 'Fascinate Inline', cursive;
-// font-family: 'Sirin Stencil', cursive;
-// font-family: 'Vast Shadow', cursive;
-// font-family: 'Diplomata SC', cursive;
+   nav
+      ul
+         display: flex
+         justify-content: space-between
+         flex-direction: row
+         padding: 0 5px
+         li
+            list-style: none
+
+            // margin: auto
+            a
+               text-decoration: none
+               color: $primary-color
+               margin: auto
+            a:hover
+               color: #494333
