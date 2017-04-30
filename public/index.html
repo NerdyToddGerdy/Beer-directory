@@ -21,10 +21,12 @@
          </nav>
       </header>
 
+
       <!-- HOME PAGE -->
       <section ng-show="main.showHomePage">
-         <h3>WElcome to the Home Page</h3>
+         <h3>Welcome to the Home Page</h3>
       </section>
+
 
       <!-- BREWERIES SEARCH-->
       <section class="brewery-search" ng-show="main.showBrewerySearch">
@@ -34,10 +36,12 @@
          </form>
       </section>
 
+
       <!-- BEER PAGE -->
       <section ng-show="main.showBeerPage">
          <h3>Search For A Beer</h3>
       </section>
+
 
       <!-- LOGIN PAGE -->
       <section ng-show="main.showLoginForm">
@@ -52,13 +56,12 @@
         <li>  <a href="#" ng-click="main.showRegisterForm = !main.showRegisterForm">Register</a></li>
         <div ng-show="main.showRegisterForm">
           <form ng-submit='main.addUser()'>
-            <input  ng-model ="main.userName"placeholder="user name"><br>
+            <input  ng-model ="main.userName" placeholder="user name"><br>
             <input  ng-model ="main.password" type='password'placeholder="password"><br>
             <input type='submit' ng-click ="main.showRegisterForm = !main.showRegisterForm"name="register" value='Register'>
           </form>
         </div>
      </section>
-
 
 
       <footer>

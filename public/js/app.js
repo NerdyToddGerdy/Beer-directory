@@ -2,11 +2,11 @@ var app = angular.module('BreweryApp', []);
 
 app.controller('MainController', ['$http', function($http){
    this.showBrewerySearch = false;
-   this.showRegisterForm = false;
-   this.showLoginForm = false;
-   this.isAdmin =false;
    this.showHomePage = true;
    this.showBeerPage = false;
+   this.showLoginForm = false;
+   this.showRegisterForm = false;
+   this.isAdmin =false;
    this.getBreweries = function(brew){
       console.log(brew);
       $http({
@@ -82,18 +82,8 @@ app.controller('MainController', ['$http', function($http){
     this.userName = "";
     this.password = "";
   };
-
 }]);
 
-
-// User Registration controller
-app.controller('UserController', ['$http', function($http){
-
-
-
-
-
-}]); // end of user controller
 
 
 app.controller('BreweryDBController', ['$http', function($http) {
