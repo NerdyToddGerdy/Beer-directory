@@ -1,7 +1,3 @@
-var app = angular.module('BreweryDBApp', []);
-
-console.log("BreweryDBApp");
-
 app.controller('BreweryDBController', ['$http', function($http) {
   var controller = this;
   this.results = {
