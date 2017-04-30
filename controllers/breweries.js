@@ -24,4 +24,9 @@ router.delete('/:id', function(req, res){
   });
 })
 
+//breweries index page : for testing purpose
+router.get('/', function(req, res){
+  res.send('List  All Brewery here')
+})
+
 module.exports  = router;

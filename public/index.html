@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+  <script src="/js/app.js" charset="utf-8"></script>
+  <link href="https://fonts.googleapis.com/css?family=Diplomata+SC|Fascinate+Inline|Fredericka+the+Great|Sirin+Stencil|Vast+Shadow" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header>
+    <h1>Brew Near You</h1>
+    <nav>
+      <ul ng-controller="CreateUserController as createUser" ng-controller="UserLogInController as loginUser">
+        <li><a href="#">home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">breweries</a></li>
+        <li><a href="#">beers</a></li>
+        <li><a href="#" ng-click="loginUser.showLoginForm = !loginUser.showLoginForm">log in</a></li>
+        <div ng-show="loginUser.showLoginForm">
+          <form >
+            <input  ng-model ="loginUser.userName"placeholder="user name"><br>
+            <input  ng-model ="loginUser.password"  type='password' placeholder="password"><br>
+            <button ng-click ="loginUser.showLoginForm = !loginUser.showLoginForm"type="button" name="login">Sign in</button>
+          </form>
+        </div>
+
+        <li>  <a href="#" ng-click="createUser.showRegisterForm = !createUser.showRegisterForm">Register</a></li>
+        <div ng-show="createUser.showRegisterForm">
+          <form ng-submit='createUser.addUser()'>
+            <input  ng-model ="createUser.userName"placeholder="user name"><br>
+            <input  ng-model ="createUser.password" type='password'placeholder="password"><br>
+            <input type='submit' ng-click ="createUser.showRegisterForm = !createUser.showRegisterForm"type="button" name="Register" value='Register'>
+          </form>
+        </div>
+      </ul>
+    </nav>
+  </header>
+  {{2+2}}
+</body>
+</html>
