@@ -5,7 +5,7 @@ var app = angular.module('MyApp', []);
 
 // User Registration controller
 app.controller('UserController', ['$http', function($http){
-  this.showRegisterForm= false;
+  this.showRegisterForm = false;
   this.showLoginForm = false;
   this.isAdmin =false;
   this.addUser = function(){
@@ -21,18 +21,20 @@ app.controller('UserController', ['$http', function($http){
         }).then(function(response){ //success
             console.log("this is respnse " , response);
         }, function(error){ //fail
-
+            console.log("angualr: err " , error);
+            alert('The user name is already taken')
         });
         this.userName = "";
         this.password = "";
         this.isAdmin  = false;
+
     };
 
 // log in section
 
  // login method
  this.logIn = function(){
-   console.log("Log in as : ", this.userName);
+  //  console.log("Log in as : ", this.userName);
    $http({
        method:'POST',
        url:'/sessions',
@@ -41,9 +43,10 @@ app.controller('UserController', ['$http', function($http){
            password: this.password,
        }
    }).then(function(response){ //success
-       console.log("log in res:  " , response);
+       console.log(response.data);
    }, function(error){ //fail
-
+        console.log("wrong user name or password");
+        alert("wrong user name or password")
    });
    this.userName = "";
    this.password = "";
