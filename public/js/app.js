@@ -1,18 +1,100 @@
 var app = angular.module('BreweryApp', []);
 
 app.controller('MainController', ['$http', function($http){
+   this.showBrewerySearch = false;
+   this.showRegisterForm = false;
+   this.showLoginForm = false;
+   this.isAdmin =false;
+   this.showHomePage = true;
+   this.showBeerPage = false;
    this.getBreweries = function(brew){
       console.log(brew);
       $http({
          method:"GET",
-         url:"http://api.brewerydb.com/v2/locations?key=cbf87c44338b3c02f584632bf9a5cf01&postalCode=" + brew //error not Access-Control-Allow-Origin
+         url:"breweries/" + brew //error not Access-Control-Allow-Origin
       }).then(function(response){
          console.log(response);
-      }),function(error){
-         console.log(error);
-      };
+      });
    };
+   this.openHomePage = function(){
+      this.showHomePage = true;
+      this.showBrewerySearch = false;
+      this.showLoginForm = false;
+      this.showBeerPage = false;
+   };
+   this.openBrewerySearch = function(){
+      this.showBrewerySearch = true;
+      this.showLoginForm = false;
+      this.showHomePage = false;
+      this.showBeerPage = false;
+   };
+   this.openBeerSearch = function(){
+      this.showHomePage = false;
+      this.showBrewerySearch = false;
+      this.showLoginForm = false;
+      this.showBeerPage = true;
+   };
+   this.openLoginPage = function(){
+      this.showBrewerySearch = false;
+      this.showLoginForm = true;
+      this.showHomePage = false;
+      this.showBeerPage = false;
+   };
+   this.addUser = function(){
+     // console.log('add user');
+         $http({
+             method:'POST',
+             url:'/users',
+             data: {
+                 username: this.userName,
+                 password: this.password,
+                 isAdmin: this.isAdmin
+             }
+         }).then(function(response){ //success
+             console.log("this is respnse " , response);
+         }, function(error){ //fail
+             console.log("angualr: err " , error);
+             alert('The user name is already taken');
+         });
+         this.userName = "";
+         this.password = "";
+         this.isAdmin  = false;
+     };
+
+ // log in section
+
+  // login method
+  this.logIn = function(){
+   //  console.log("Log in as : ", this.userName);
+    $http({
+        method:'POST',
+        url:'/sessions',
+        data: {
+            username: this.userName,
+            password: this.password,
+        }
+    }).then(function(response){ //success
+        console.log(response.data);
+    }, function(error){ //fail
+         console.log("wrong user name or password");
+         alert("wrong user name or password");
+    });
+    this.userName = "";
+    this.password = "";
+  };
+
 }]);
+
+
+// User Registration controller
+app.controller('UserController', ['$http', function($http){
+
+
+
+
+
+}]); // end of user controller
+
 
 app.controller('BreweryDBController', ['$http', function($http) {
   var controller = this;
