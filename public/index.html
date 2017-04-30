@@ -16,7 +16,7 @@
                <li>home</li>
                <li>breweries</li>
                <li>beers</li>
-               <li>log in</li>
+               <li ng-click="userCtrl.showLoginForm = !userCtrl.showLoginForm">log in</li>
             </ul>
          </nav>
       </header>
@@ -29,6 +29,27 @@
             <input type="text" ng-model="brew" placeholder="Search by zip code">
          </form>
       </section>
+
+      <!-- LOGIN PAGE -->
+      <section ng-show="userCtrl.showLoginForm">
+         <h3>Log In</h3>
+            <!-- {{userCtrl.userName}} -->
+        <form ng-submit='userCtrl.logIn()'>
+          <input  ng-model ="userCtrl.userName" placeholder="username"><br>
+          <input  ng-model ="userCtrl.password"  type='password' placeholder="password"><br>
+          <input  type='submit' ng-click ="userCtrl.showLoginForm = !userCtrl.showLoginForm" name="login" value="Log in">
+        </form>
+
+        <li>  <a href="#" ng-click="userCtrl.showRegisterForm = !userCtrl.showRegisterForm">Register</a></li>
+        <div ng-show="userCtrl.showRegisterForm">
+          <form ng-submit='userCtrl.addUser()'>
+            <input  ng-model ="userCtrl.userName"placeholder="user name"><br>
+            <input  ng-model ="userCtrl.password" type='password'placeholder="password"><br>
+            <input type='submit' ng-click ="userCtrl.showRegisterForm = !userCtrl.showRegisterForm"name="register" value='Register'>
+          </form>
+        </div>
+     </section>
+
 
 
       <footer>
