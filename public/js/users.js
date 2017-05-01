@@ -8,12 +8,13 @@ console.clear();
 angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$window",  function($http, $cookies, $window){
 
   var controller = this;
+  controller.showGreeting = false;
   this.userName ="";
   this.password ="";
-  this.notLogin = true;
   this.showRegisterForm = false;
-  this.showLoginForm = false;
+  this.showLoginForm = true;
   this.isAdmin =false;
+
   this.addUser = function(){
     console.log('add user');
     $http({
@@ -48,10 +49,12 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
       if(response.data == "User is not found") {
         alert('User is not found')
       }else {
+
         controller.currentUser = response.data.currentuser; // get currrent user information
         $cookies.put('logInSuccess', true);
         $cookies.put("username", response.data.currentuser.username);// set cookies username
-        controller.notLogin = false;
+
+        controller.showGreeting = true;
         //       console.log('current User is: ', controller.currentUser);
       }
       console.log('from log in: ', response.data);
@@ -89,7 +92,15 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     $window.location.reload();
   }// end of logout
 
+  this.resetRegisterForm = function (){
+    controller.showRegisterForm = !controller.showRegisterForm;
+    controller.showLoginForm = !controller.showLoginForm;
+  }
 
+  this.resetLoginForm = function(){
+    controller.showRegisterForm = !controller.showRegisterForm;
+    controller.showLoginForm = !controller.showLoginForm;
+  }
   //set cookie section
   if ($cookies.get('logInSuccess')){
     console.log('on reload');
