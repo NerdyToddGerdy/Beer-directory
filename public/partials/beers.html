@@ -1,0 +1,34 @@
+
+
+<div ng-controller="BeerDBController as beerCtrl">
+
+  <!-- beer page -->
+  <div ng-controller="BeerDisplayController as displayCtrl">
+
+    <!-- beer search form -->
+    <div ng-show="displayCtrl.showSearchForm">
+      {{displayCtrl}}
+      <h3>Search For A Beer</h3>
+      <form ng-submit="beerCtrl.getBeerByName(beerName)">
+        <input type="text" ng-model="beerName" placeholder="Beer name">
+
+        <input ng-click="" type="submit" name="search" value="Find Beer">
+      </form>
+
+      <ul>
+        <li ng-repeat="beer in beerCtrl.beers">
+          <p ng-click="displayCtrl.showDetails(beerCtrl, beer)">{{beer.name}}</p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- beer details form -->
+    <div ng-show="displayCtrl.showDetailsForm">
+      <h3>{{beerCtrl.selectedBeer.name}} - {{beerCtrl.selectedBeer.style}}</h3>
+
+      {{beerCtrl.selectedBeer.description}}
+
+      <button ng-click="displayCtrl.backToSearchForm()">Back To Search</button>
+    </div>
+  </div>
+</div>

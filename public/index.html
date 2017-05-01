@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html ng-app='BreweryApp'>
+<<<<<<< HEAD
 <head>
   <meta charset="utf-8">
   <title></title>
@@ -97,4 +98,95 @@
     </footer>
   </section>
 </body>
+=======
+   <head>
+      <meta charset="utf-8">
+      <title></title>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+      <script src="js/app.js" charset="utf-8"></script>
+      <script src="js/brewerydb.js" charset="utf-8"></script>
+      <script src="js/beerdb.js" charset="utf-8"></script>
+      <link href="https://fonts.googleapis.com/css?family=Diplomata+SC|Fascinate+Inline|Fredericka+the+Great|Sirin+Stencil|Vast+Shadow" rel="stylesheet">
+      <link rel="stylesheet" href="css/main.css">
+   </head>
+
+
+   <body ng-controller="MainController as main" >
+      <header>
+         <h1>Brews Near You</h1>
+         <nav>
+            <ul>
+               <li ng-click="main.openHomePage()">home</li>
+               <li ng-click="main.openBrewerySearch()">breweries</li>
+               <li ng-click="main.openBeerSearch()">beers</li>
+               <li ng-click="main.openLoginPage()">log in</li>
+            </ul>
+         </nav>
+      </header>
+
+
+      <!-- HOME PAGE -->
+      <section ng-show="main.showHomePage">
+         <h3>Welcome to the Home Page</h3>
+      </section>
+
+
+      <!-- BREWERIES SEARCH-->
+      <section class="brewery-search" ng-show="main.showBrewerySearch" ng-controller="BreweryDBController as breweryCtrl">
+         <h3>Search For A Brewery</h3>
+         <form ng-submit=breweryCtrl.getBreweriesByZip(zipCode)>
+            <input type="text" ng-model="zipCode" placeholder="Search by zip code">
+            <input type="submit" name="" value="Search">
+         </form>
+         <ul>
+            <li class="items" ng-repeat="results in breweryCtrl.breweries">
+               <h3 ng-click="main.openThisBrewery()">{{results.brewery.name}}<br></h3>
+               <img ng-click="main.openThisBrewery()" ng-src="{{results.brewery.images.squareMedium}}" alt="{{results.brewery.name}}"/>
+               <h4>{{results.streetAddress}}</h4>
+               <h4>{{results.locality}}, {{results.region}} {{results.postalCode}}</h4>
+            </li>
+         </ul>
+      </section>
+
+
+      <!-- BEER PAGE -->
+      <section ng-show="main.showBeerPage">
+        <ng-include src="'./partials/beers.html'"></ng-include>
+      </section>
+
+
+      <!-- LOGIN PAGE -->
+      <section ng-show="main.showLoginForm">
+         <h3>Log In</h3>
+            <!-- {{main.userName}} -->
+        <form ng-submit='main.logIn()'>
+          <input  ng-model ="main.userName" placeholder="username"><br>
+          <input  ng-model ="main.password"  type='password' placeholder="password"><br>
+          <input  type='submit' ng-click ="main.showLoginForm = !main.showLoginForm" name="login" value="Log in">
+        </form>
+
+        <li>  <a href="#" ng-click="main.showRegisterForm = !main.showRegisterForm">Register</a></li>
+        <div ng-show="main.showRegisterForm">
+          <form ng-submit='main.addUser()'>
+            <input  ng-model ="main.userName" placeholder="user name"><br>
+            <input  ng-model ="main.password" type='password'placeholder="password"><br>
+            <input type='submit' ng-click ="main.showRegisterForm = !main.showRegisterForm"name="register" value='Register'>
+          </form>
+        </div>
+     </section>
+
+
+     <!-- PROFILE -->
+     <!-- <section>
+
+     </section> -->
+
+     <section class="footer">
+        <footer>
+           <!-- NEED TO STATE THAT WE ARE USING THE API -->
+           <a href="https://www.breweryDB.com"><img src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png" alt=""></a>
+        </footer>
+     </section>
+   </body>
+>>>>>>> 4ff67a21cc963f09442d721d6272adbf62b4c0fa
 </html>
