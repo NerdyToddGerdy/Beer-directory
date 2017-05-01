@@ -1,8 +1,23 @@
+
 angular.module('BreweryApp').controller('BeerDBController', ['$http', function($http) {
   var controller = this;
   this.beers = [];
   this.selectedBeer = "";
   this.foundNoBeers = false;
+
+  this.addFoundBeersToList = function(data) {
+    for (var i = 0; i < data.length; i++ ) {
+      var newBeer = {
+        name: data[i].name,
+        description: data[i].style.description,
+        style: data[i].style.shortName,
+        abv: data[i].abv,
+        ibu: data[i].ibu
+      }
+    }
+    controller.beers.push(newBeer);
+  }
+
 
   this.getBeerByName = function(name) {
     var urlStr = '/breweries/proxy/v2/beers?name=' + name;
@@ -21,15 +36,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
         controller.foundNoBeers = true;
         return;
       }
-
-      for (var i = 0; i < response.data.data.length; i++ ) {
-        var newBeer = {
-          name: response.data.data[i].name,
-          description: response.data.data[i].style.description,
-          style: response.data.data[i].style.shortName
-        }
-        controller.beers.push(newBeer)
-      };
+      controller.addFoundBeersToList(response.data.data);
       controller.getBreweryByBeerID(response.data.data[0].id);
     }, function(response) {
       console.log("Get beer by name failed", response);
@@ -38,7 +45,19 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
   )};
 
   this.getBreweryByBeerID = function(beerID) {
-console.log("getBeerBrewery:", beerID);
+    var urlStr = "/breweries/proxy/v2/beer/" + beerID + "/breweries"
+
+
+    $http({
+      method: 'GET',
+      url: urlStr
+    }).then( function(response) {
+      if (response.data.hasOwnProperty('data') === true) {
+        controller.beers[0].brewery = response.data.data[0].name;
+      };
+    }), function(response) {
+      console.log("getBreweryByBeerID failed:", err);
+    };
   };
 
 }]);

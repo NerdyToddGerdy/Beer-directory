@@ -7,7 +7,6 @@
 
     <!-- beer search form -->
     <div ng-show="displayCtrl.showSearchForm">
-      {{displayCtrl}}
       <h3>Search For A Beer</h3>
       <form ng-submit="beerCtrl.getBeerByName(beerName)">
         <input type="text" ng-model="beerName" placeholder="Beer name">
@@ -29,7 +28,9 @@
     <!-- beer details form -->
     <div ng-show="displayCtrl.showDetailsForm">
       <h3>{{beerCtrl.selectedBeer.name}} - {{beerCtrl.selectedBeer.style}}</h3>
-
+      Brewery: {{beerCtrl.selectedBeer.brewery}}<br>
+      ABV: {{beerCtrl.selectedBeer.abv}}<br>
+      IBU: {{beerCtrl.selectedBeer.ibu}}<br>
       {{beerCtrl.selectedBeer.description}}
 
       <button ng-click="displayCtrl.backToSearchForm()">Back To Search</button>
