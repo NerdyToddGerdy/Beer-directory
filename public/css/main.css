@@ -6,7 +6,7 @@ body {
   width: 100%; }
   body header {
     text-align: center;
-    background: goldenrod; }
+    background: #a57621; }
     body header h1 {
       font-size: 5em;
       margin: 0; }
@@ -26,5 +26,14 @@ body {
   body section.brewery-search {
     text-shadow: 0 0 black;
     text-align: left; }
+  body footer {
+    position: absolute;
+    bottom: 0;
+    background: #a57621;
+    width: 100%; }
+    body footer a {
+      margin: 0 auto; }
+    body footer img {
+      width: 30%; }
 
 /*# sourceMappingURL=main.css.map */
