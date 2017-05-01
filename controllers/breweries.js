@@ -7,9 +7,9 @@ var Breweries = require('../models/breweries.js'); // employee schema
 // if this is deleted requests to brewerydb will fail
 router.use('/proxy', proxy('api.brewerydb.com' ,{
   proxyReqPathResolver: function(req) {
-    return require('url').parse(req.url).path + "&key=cbf87c44338b3c02f584632bf9a5cf01";
+    return require('url').parse(req.url).path + "&key=cbf87c44338b3c02f584632bf9a5cf01"
   }
-}));
+}))
 
 
 router.post('/', function(req, res){
