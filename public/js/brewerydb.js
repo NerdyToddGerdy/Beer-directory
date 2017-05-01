@@ -1,15 +1,6 @@
 angular.module('BreweryApp').controller('BreweryDBController', ['$http', function($http) {
 
-<<<<<<< HEAD
-console.log("BreweryDBApp");
 
-
-
-
-
-app.controller('BreweryDBController', ['$http', function($http) {
-=======
->>>>>>> 54a1fdda6bb3d5f1603081fa407348e12610e73e
   var controller = this;
   this.breweries = [];
 

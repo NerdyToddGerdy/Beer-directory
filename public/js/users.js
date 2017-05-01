@@ -17,7 +17,7 @@ angular.module('BreweryApp').controller('UserController', ['$http', function($ht
             console.log("this is respnse " , response);
         }, function(error){ //fail
             console.log("angualr: err " , error);
-            alert('The user name is already taken')
+            alert('The user name is already taken');
         });
         this.userName = "";
         this.password = "";

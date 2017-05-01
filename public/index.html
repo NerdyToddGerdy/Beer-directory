@@ -5,10 +5,13 @@
       <title></title>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
       <script src="js/app.js" charset="utf-8"></script>
+      <script src="js/brewerydb.js" charset="utf-8"></script>
       <link href="https://fonts.googleapis.com/css?family=Diplomata+SC|Fascinate+Inline|Fredericka+the+Great|Sirin+Stencil|Vast+Shadow" rel="stylesheet">
       <link rel="stylesheet" href="css/main.css">
    </head>
-   <body ng-controller="MainController as main">
+
+
+   <body ng-controller="MainController as main" >
       <header>
          <h1>Brew Near You</h1>
          <nav>
@@ -29,10 +32,11 @@
 
 
       <!-- BREWERIES SEARCH-->
-      <section class="brewery-search" ng-show="main.showBrewerySearch">
+      <section class="brewery-search" ng-show="main.showBrewerySearch" ng-controller="BreweryDBController as brewery">
          <h3>Search For A Brewery</h3>
-         <form ng-submit=main.getBreweries(brew)>
-            <input type="text" ng-model="brew" placeholder="Search by zip code">
+         <form ng-submit=brewery.getBreweriesByZip(zipCode)>
+            <input type="text" ng-model="zipCode" placeholder="Search by zip code">
+            <input type="submit" name="" value="test">
          </form>
       </section>
 
