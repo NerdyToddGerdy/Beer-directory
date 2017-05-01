@@ -1,10 +1,5 @@
-
-
-console.clear();
-var app = angular.module('MyApp', []);
-
 // User Registration controller
-app.controller('UserController', ['$http', function($http){
+angular.module('BreweryApp').controller('UserController', ['$http', function($http){
   this.showRegisterForm = false;
   this.showLoginForm = false;
   this.isAdmin =false;
