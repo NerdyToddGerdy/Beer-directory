@@ -1,4 +1,5 @@
 var app = angular.module('BreweryApp', []);
+<<<<<<< HEAD
 
 app.controller('MainController', ['$http', function($http){
    this.showBrewerySearch = false;
@@ -86,7 +87,7 @@ app.controller('MainController', ['$http', function($http){
 
 
 
-app.controller('BreweryDBController', ['$http', function($http) {
+app.controller('BreweryDBController1', ['$http', function($http) {
   var controller = this;
   this.results = {
    "currentPage":1,
@@ -416,3 +417,5 @@ app.controller('BreweryDBController', ['$http', function($http) {
 
   this.breweries = this.results.data;
 }])
+=======
+>>>>>>> 54a1fdda6bb3d5f1603081fa407348e12610e73e
