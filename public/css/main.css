@@ -2,8 +2,8 @@ body {
   background: #494333;
   margin: 0 auto;
   font-family: "Fredericka the Great", cursive;
-  text-shadow: 1px 0px #7f6322;
-  width: 100%; }
+  width: 100%;
+  height: 100; }
   body header {
     text-align: center;
     background: #a57621; }
@@ -23,14 +23,17 @@ body {
       margin: auto; }
     body nav ul li:hover {
       color: #494333; }
-  body section.brewery-search {
-    text-shadow: 0 0 black;
-    text-align: left; }
+  body section {
+    min-height: 30%; }
+    body section .brewery-search {
+      text-shadow: 0 0 black;
+      text-align: left; }
   body footer {
     position: absolute;
     bottom: 0;
-    background: #a57621;
-    width: 100%; }
+    width: 100%;
+    height: 70px;
+    background: #a57621; }
     body footer a {
       margin: 0 auto; }
     body footer img {

@@ -5,9 +5,10 @@ body
    background: #494333
    margin: 0 auto
    font-family: 'Fredericka the Great', cursive
-   text-shadow: 1px 0px #7f6322
+   // text-shadow: 1px 0px #7f6322
    // text-align: center
    width: 100%
+   height: 100
    header
       text-align: center
       background: $secondary-color
@@ -29,16 +30,17 @@ body
             margin: auto
          li:hover
             color: #494333
-   section.brewery-search
-      text-shadow: 0 0 black
-      text-align: left
+   section
+      min-height: 30%
+      .brewery-search
+         text-shadow: 0 0 black
+         text-align: left
    footer
       position: absolute
       bottom: 0
-      background: $secondary-color
-      // right: 0
-      // margin: 0 auto
       width: 100%
+      height: 70px
+      background: $secondary-color
       a
          margin: 0 auto
       img

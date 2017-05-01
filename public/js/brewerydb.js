@@ -15,7 +15,8 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
         'Content-Type': 'application/x-www-form-urlencoded',
       }
     }).then( function(response) {
-      controller.breweries = response.data;
+      console.log('here is my log');
+      controller.breweries = response.data.data;
     }, function(response) {
       console.log("Get by zip code failed", response);
       this.breweries = [];

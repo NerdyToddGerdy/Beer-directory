@@ -13,7 +13,7 @@
 
    <body ng-controller="MainController as main" >
       <header>
-         <h1>Brew Near You</h1>
+         <h1>Brews Near You</h1>
          <nav>
             <ul>
                <li ng-click="main.openHomePage()">home</li>
@@ -39,9 +39,9 @@
             <input type="submit" name="" value="Search">
          </form>
          <ul>
-            <li ng-repeat="results in breweryCtrl.breweries.data">
-               <h3>{{results.brewery.name}}<br></h3>
-               <img src="{{results.brewery.images.squareMedium}}" alt="{{results.brewery.name}}">
+            <li class="items" ng-repeat="results in breweryCtrl.breweries">
+               <h3 ng-click="main.openThisBrewery()">{{results.brewery.name}}<br></h3>
+               <img ng-click="main.openThisBrewery()" ng-src="{{results.brewery.images.squareMedium}}" alt="{{results.brewery.name}}"/>
                <h4>{{results.streetAddress}}</h4>
                <h4>{{results.locality}}, {{results.region}} {{results.postalCode}}</h4>
             </li>
@@ -77,14 +77,15 @@
 
 
      <!-- PROFILE -->
-     <section>
+     <!-- <section>
 
+     </section> -->
+
+     <section class="footer">
+        <footer>
+           <!-- NEED TO STATE THAT WE ARE USING THE API -->
+           <a href="https://www.breweryDB.com"><img src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png" alt=""></a>
+        </footer>
      </section>
-
-
-      <footer>
-         <!-- NEED TO STATE THAT WE ARE USING THE API -->
-         <a href="https://www.breweryDB.com"><img src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png" alt=""></a>
-      </footer>
    </body>
 </html>

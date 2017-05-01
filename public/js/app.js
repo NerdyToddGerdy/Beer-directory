@@ -37,4 +37,7 @@ app.controller('MainController', ['$http', function($http){
       this.showHomePage = false;
       this.showBeerPage = false;
    };
+   this.openThisBrewery = function(){
+      console.log('this brewery');
+   };
 }]);
