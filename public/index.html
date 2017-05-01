@@ -13,7 +13,7 @@
 
    <body ng-controller="MainController as main" >
       <header>
-         <h1>Brew Near You</h1>
+         <h1>Brews Near You</h1>
          <nav>
             <ul>
                <li ng-click="main.openHomePage()">home</li>
@@ -32,12 +32,20 @@
 
 
       <!-- BREWERIES SEARCH-->
-      <section class="brewery-search" ng-show="main.showBrewerySearch" ng-controller="BreweryDBController as brewery">
+      <section class="brewery-search" ng-show="main.showBrewerySearch" ng-controller="BreweryDBController as breweryCtrl">
          <h3>Search For A Brewery</h3>
-         <form ng-submit=brewery.getBreweriesByZip(zipCode)>
+         <form ng-submit=breweryCtrl.getBreweriesByZip(zipCode)>
             <input type="text" ng-model="zipCode" placeholder="Search by zip code">
-            <input type="submit" name="" value="test">
+            <input type="submit" name="" value="Search">
          </form>
+         <ul>
+            <li class="items" ng-repeat="results in breweryCtrl.breweries">
+               <h3 ng-click="main.openThisBrewery()">{{results.brewery.name}}<br></h3>
+               <img ng-click="main.openThisBrewery()" ng-src="{{results.brewery.images.squareMedium}}" alt="{{results.brewery.name}}"/>
+               <h4>{{results.streetAddress}}</h4>
+               <h4>{{results.locality}}, {{results.region}} {{results.postalCode}}</h4>
+            </li>
+         </ul>
       </section>
 
 
@@ -68,8 +76,16 @@
      </section>
 
 
-      <footer>
-         <!-- NEED TO STATE THAT WE ARE USING THE API -->
-      </footer>
+     <!-- PROFILE -->
+     <!-- <section>
+
+     </section> -->
+
+     <section class="footer">
+        <footer>
+           <!-- NEED TO STATE THAT WE ARE USING THE API -->
+           <a href="https://www.breweryDB.com"><img src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png" alt=""></a>
+        </footer>
+     </section>
    </body>
 </html>
