@@ -5,8 +5,7 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
   this.breweries = [];
 
   this.getBreweriesByZip = function(zipCode) {
-    console.log("getBreweries");
-    var urlStr = '/breweries/proxy/v2/locations?key=cbf87c44338b3c02f584632bf9a5cf01&postalCode=' + zipCode;
+    var urlStr = '/breweries/proxy/v2/locations?postalCode=' + zipCode;
 
     $http({
       method: 'GET',
@@ -15,8 +14,6 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
         'Content-Type': 'application/x-www-form-urlencoded',
       }
     }).then( function(response) {
-      console.log("here");
-      console.log(response.data);
       controller.breweries = response.data;
     }, function(response) {
       console.log("Get by zip code failed", response);
@@ -25,7 +22,7 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
   };
 
   this.getBreweryByName = function(name) {
-    var urlStr = 'breweries/proxy/v2/breweries?key=cbf87c44338b3c02f584632bf9a5cf01&name=' + name;
+    var urlStr = 'breweries/proxy/v2/breweries?name=' + name;
 
     $http({
       method: 'GET',
