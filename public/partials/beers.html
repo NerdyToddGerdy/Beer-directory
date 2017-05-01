@@ -15,6 +15,10 @@
         <input ng-click="" type="submit" name="search" value="Find Beer">
       </form>
 
+      <div ng-show="beerCtrl.foundNoBeers">
+        We didn't find any beers matching your beer name.
+      </div>
+
       <ul>
         <li ng-repeat="beer in beerCtrl.beers">
           <p ng-click="displayCtrl.showDetails(beerCtrl, beer)">{{beer.name}}</p>
