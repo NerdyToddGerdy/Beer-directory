@@ -1,6 +1,12 @@
+var proxy = require('express-http-proxy');
 var express = require('express');
 var router = express.Router();
 var Breweries = require('../models/breweries.js'); // employee schema
+
+// 3rd party apis need to be accessed throughh a proxy
+// if this is deleted requests to brewerydb will fail
+router.use('/proxy', proxy('api.brewerydb.com'))
+
 
 router.post('/', function(req, res){
   console.log('create new Brewery', req.body);
