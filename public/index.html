@@ -6,6 +6,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
       <script src="js/app.js" charset="utf-8"></script>
       <script src="js/brewerydb.js" charset="utf-8"></script>
+      <script src="js/beerdb.js" charset="utf-8"></script>
       <link href="https://fonts.googleapis.com/css?family=Diplomata+SC|Fascinate+Inline|Fredericka+the+Great|Sirin+Stencil|Vast+Shadow" rel="stylesheet">
       <link rel="stylesheet" href="css/main.css">
    </head>
@@ -51,7 +52,7 @@
 
       <!-- BEER PAGE -->
       <section ng-show="main.showBeerPage">
-         <h3>Search For A Beer</h3>
+        <ng-include src="'./partials/beers.html'"></ng-include>
       </section>
 
 
