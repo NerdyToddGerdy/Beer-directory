@@ -1,8 +1,5 @@
-<<<<<<< HEAD
+
 var app = angular.module('BreweryApp', ['ngCookies']);
-=======
-var app = angular.module('BreweryApp', []);
->>>>>>> 4ff67a21cc963f09442d721d6272adbf62b4c0fa
 app.controller('MainController', ['$http', function($http){
    this.showBrewerySearch = false;
    this.showHomePage = true;
@@ -40,10 +37,7 @@ app.controller('MainController', ['$http', function($http){
       this.showLoginForm = true;
       this.showHomePage = false;
       this.showBeerPage = false;
-<<<<<<< HEAD
-  
-=======
->>>>>>> 4ff67a21cc963f09442d721d6272adbf62b4c0fa
+
    };
    this.openThisBrewery = function(){
       console.log('this brewery');
