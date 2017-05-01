@@ -6,7 +6,8 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
 
   this.getBreweriesByZip = function(zipCode) {
     var urlStr = '/breweries/proxy/v2/locations?postalCode=' + zipCode;
-
+    console.log(zipCode);
+    console.log(urlStr);
     $http({
       method: 'GET',
       url: urlStr,
@@ -31,7 +32,7 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
       controller.breweries = response.data;
     }, function(response) {
       console.log("getBreweryByName failed:", response);
-    })
+   });
   };
 
 
