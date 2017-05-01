@@ -41,7 +41,7 @@ angular.module('BreweryApp').controller('UserController', ['$http', function($ht
        console.log(response.data);
    }, function(error){ //fail
         console.log("wrong user name or password");
-        alert("wrong user name or password")
+        alert("wrong user name or password");
    });
    this.userName = "";
    this.password = "";

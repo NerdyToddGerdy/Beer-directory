@@ -15,7 +15,7 @@ router.use('/proxy', proxy('api.brewerydb.com' ,{
 router.post('/', function(req, res){
   console.log('create new Brewery', req.body);
   Breweries.create(req.body, function (err, createdBrewery){
-    res.json(createdBrewery)
+    res.json(createdBrewery);
   });
 });
 
@@ -32,11 +32,11 @@ router.delete('/:id', function(req, res){
   Breweries.findByIdAndRemove(req.params.id, function(err, deletedBrewery){
     res.json(deletedBrewery);
   });
-})
+});
 
 //breweries index page : for testing purpose
 router.get('/', function(req, res){
-  res.send('List  All Brewery here')
-})
+  res.send('List  All Brewery here');
+});
 
 module.exports  = router;
