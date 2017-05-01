@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Breweries = require('../models/breweries.js'); // employee schema
-
+var Breweries = require('../models/breweries.js'); // Breweries schema
 router.post('/', function(req, res){
   console.log('create new Brewery', req.body);
   Breweries.create(req.body, function (err, createdBrewery){
