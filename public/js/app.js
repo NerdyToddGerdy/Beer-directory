@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 console.clear();
@@ -58,6 +59,9 @@ app.controller('UserController', ['$http', function($http){
 }]); // end of user controller
 =======
 var app = angular.module('BreweryApp', []);
+=======
+var app = angular.module('BreweryApp', ['ngAnimate']);
+>>>>>>> 739ac3cf5d077c5daf8360298fcffed0bb870404
 app.controller('MainController', ['$http', function($http){
    this.showBrewerySearch = false;
    this.showHomePage = true;
@@ -80,29 +84,37 @@ app.controller('MainController', ['$http', function($http){
       this.showBrewerySearch = false;
       this.showLoginForm = false;
       this.showBeerPage = false;
+      this.showBreweryPage = false;
    };
    this.openBrewerySearch = function(){
       this.showBrewerySearch = true;
       this.showLoginForm = false;
       this.showHomePage = false;
       this.showBeerPage = false;
+      this.showBreweryPage = false;
    };
    this.openBeerSearch = function(){
       this.showHomePage = false;
       this.showBrewerySearch = false;
       this.showLoginForm = false;
       this.showBeerPage = true;
+      this.showBreweryPage = false;
    };
    this.openLoginPage = function(){
       this.showBrewerySearch = false;
       this.showLoginForm = true;
       this.showHomePage = false;
       this.showBeerPage = false;
+      this.showBreweryPage = false;
    };
-   this.openThisBrewery = function(data){
-      console.log('this brewery');
-      console.log(data.brewery);
-      //Hide non selected breweries
+   this.openThisBrewery = function(results, breweryCtrl){
+      // console.log(breweryCtrl);
+      // console.log(results.brewery);
+      this.showBrewerySearch = false;
+      this.showBreweryPage = true;
+      breweryCtrl.currentBrewery1 = results;
+      console.log(breweryCtrl.currentBrewery1);
+
       //enlarge selected brewery and add data
    };
 }]);
