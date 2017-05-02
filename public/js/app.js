@@ -1,6 +1,5 @@
 
 
-console.clear();
 var app = angular.module('MyApp', []);
 
 // User Registration controller

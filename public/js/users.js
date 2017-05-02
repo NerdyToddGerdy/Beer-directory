@@ -1,4 +1,3 @@
-console.clear();
 // var app = angular.module('BreweryApp', ['ngCookies']);
 
 // User Registration controller
