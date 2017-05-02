@@ -5,5 +5,6 @@ Repository: https://github.com/Toadilicious/Beer-directory
 
 Live website: https://beers-near-you.herokuapp.com/
 
+Brewery and beer data is from http://www.brewerydb.com/.
 
-Technologies: express-http-proxy
+Technologies: express, express-http-proxy, angular, SASS,
