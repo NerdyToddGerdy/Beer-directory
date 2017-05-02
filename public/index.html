@@ -39,7 +39,7 @@
 
 
       <!-- BREWERIES SEARCH-->
-      <section class="brewery-search" ng-controller="BreweryDBController as breweryCtrl">
+      <section ng-show="main.showBreweries" class="brewery-search" ng-controller="BreweryDBController as breweryCtrl">
          <div class=""  ng-show="main.showBrewerySearch">
             <h3>Search For A Brewery</h3>
             <form ng-submit=breweryCtrl.getBreweriesByZip(zipCode)>
@@ -71,7 +71,7 @@
 
       <!-- BEER PAGE -->
       <section ng-show="main.showBeerPage">
-         test
+         <h1>test</h1>
         <ng-include src="'./partials/beers.html'"></ng-include>
       </section>
 

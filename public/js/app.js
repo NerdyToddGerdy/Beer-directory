@@ -22,6 +22,7 @@ app.controller('MainController', ['$http', function($http){
       this.showLoginForm = false;
       this.showBeerPage = false;
       this.showBreweryPage = false;
+      this.showBreweries = false;
    };
    this.openBrewerySearch = function(){
       this.showBrewerySearch = true;
@@ -29,6 +30,7 @@ app.controller('MainController', ['$http', function($http){
       this.showHomePage = false;
       this.showBeerPage = false;
       this.showBreweryPage = false;
+      this.showBreweries = true;
    };
    this.openBeerSearch = function(){
       this.showHomePage = false;
@@ -36,6 +38,7 @@ app.controller('MainController', ['$http', function($http){
       this.showLoginForm = false;
       this.showBeerPage = true;
       this.showBreweryPage = false;
+      this.showBreweries = false;
    };
    this.openLoginPage = function(){
       this.showBrewerySearch = false;
@@ -43,6 +46,7 @@ app.controller('MainController', ['$http', function($http){
       this.showHomePage = false;
       this.showBeerPage = false;
       this.showBreweryPage = false;
+      this.showBreweries = false;
    };
    this.openThisBrewery = function(results, breweryCtrl){
       // console.log(breweryCtrl);
