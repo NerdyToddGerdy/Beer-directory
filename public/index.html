@@ -32,6 +32,9 @@
       <!-- HOME PAGE -->
       <section ng-show="main.showHomePage">
          <h3>Welcome to the Home Page</h3>
+         <h2 ng-click="main.openBrewerySearch()">Find A Brewery</h2>
+         <h2 ng-click="main.openBeerSearch()">Find A Beer</h2>
+         <h2 ng-click="main.openLoginPage()">Login</h2>
       </section>
 
 
@@ -68,6 +71,7 @@
 
       <!-- BEER PAGE -->
       <section ng-show="main.showBeerPage">
+         test
         <ng-include src="'./partials/beers.html'"></ng-include>
       </section>
 

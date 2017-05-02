@@ -1,7 +1,7 @@
 /* when hiding the picture */
-.ng-hide-add         { animation:0.5s fadeOutright ease; }
+.ng-hide-add         { animation:0.95s zoomOut ease; }
 
 /* when showing the picture */
 .ng-hide-remove      { animation:0.95s zoomIn ease; }
 
-.ng-scope-add         { animation:0.5s bounceInDown ease;}
+/*.ng-scope-add         { animation:0.5s bounceInDown ease;}*/
