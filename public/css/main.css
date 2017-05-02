@@ -4,6 +4,8 @@ body {
   font-family: "Fredericka the Great", cursive;
   width: 100%;
   height: 100; }
+  body h3 {
+    margin: 0; }
   body header {
     text-align: center;
     background: #a57621; }
