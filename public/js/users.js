@@ -68,7 +68,6 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     $cookies.remove('pwd');
     $cookies.remove('showGreeting');
     $cookies.remove('logInSuccess');
-    $cookies.remove("showLoginForm");
     $http({
       method:'POST',
       url:'/sessions?_method=DELETE',

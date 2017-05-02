@@ -8,7 +8,6 @@ var userSchema = Schema({
     isAdmin: Boolean,
     beers: [],
     breweries:[],
-
 });
 
 var User = mongoose.model('User', userSchema);

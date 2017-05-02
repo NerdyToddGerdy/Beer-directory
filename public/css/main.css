@@ -3,10 +3,14 @@ body {
   margin: 0 auto;
   font-family: "Fredericka the Great", cursive;
   width: 100%;
-  height: 100; }
+  height: 100%; }
+  body h3 {
+    margin: 0; }
   body header {
     text-align: center;
-    background: #a57621; }
+    background: #a57621;
+    width: 100%;
+    position: fixed; }
     body header h1 {
       font-size: 5em;
       margin: 0; }
@@ -14,7 +18,8 @@ body {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    padding: 0 5px; }
+    padding: 0 5px;
+    margin: 0; }
     body nav ul li {
       list-style: none;
       font-size: 3em;
@@ -24,20 +29,54 @@ body {
     body nav ul li:hover {
       color: #494333; }
   body section {
-    min-height: 30%; }
+    padding-left: 1%;
+    height: 100%; }
     body section .brewery-search {
       text-shadow: 0 0 black;
       text-align: left; }
   body footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
-    height: 70px;
+    height: 10vh;
     background: #a57621; }
     body footer a {
       margin: 0 auto; }
     body footer img {
       width: 30%; }
+  body .items {
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    list-style: none;
+    padding: 0 15px;
+    height: 330px;
+    display: inline-table;
+    background-color: #b8a270;
+    margin: 0px 11px 10px 0;
+    box-shadow: 5px 5px 8px 0px #332605; }
+  body .footer {
+    height: 10%; }
+  body .breweryShowSection {
+    border: 2px black solid;
+    width: 66%;
+    border-radius: 5px;
+    padding: 1%;
+    height: 65%;
+    background: #b8a270;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around; }
+    body .breweryShowSection img {
+      border-radius: 1%;
+      box-shadow: 9px 6px #494333; }
+  body .spacing {
+    height: 10vh;
+    width: 1px; }
+  body .spacing-head {
+    height: 11em; }
 
 
 /*this reservers for google map */
