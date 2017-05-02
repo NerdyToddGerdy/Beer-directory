@@ -3,12 +3,14 @@ body {
   margin: 0 auto;
   font-family: "Fredericka the Great", cursive;
   width: 100%;
-  height: 100; }
+  height: 100%; }
   body h3 {
     margin: 0; }
   body header {
     text-align: center;
-    background: #a57621; }
+    background: #a57621;
+    width: 100%;
+    position: fixed; }
     body header h1 {
       font-size: 5em;
       margin: 0; }
@@ -16,7 +18,8 @@ body {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    padding: 0 5px; }
+    padding: 0 5px;
+    margin: 0; }
     body nav ul li {
       list-style: none;
       font-size: 3em;
@@ -27,15 +30,16 @@ body {
       color: #494333; }
   body section {
     padding-left: 1%;
-    height: 85vh; }
+    height: 100%; }
     body section .brewery-search {
       text-shadow: 0 0 black;
       text-align: left; }
   body footer {
-    position: relative;
+    position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
-    height: 24vh;
+    height: 10vh;
     background: #a57621; }
     body footer a {
       margin: 0 auto; }
@@ -68,5 +72,10 @@ body {
     body .breweryShowSection img {
       border-radius: 1%;
       box-shadow: 9px 6px #494333; }
+  body .spacing {
+    height: 10vh;
+    width: 1px; }
+  body .spacing-head {
+    height: 11em; }
 
 /*# sourceMappingURL=main.css.map */

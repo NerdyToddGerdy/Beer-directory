@@ -29,24 +29,30 @@
          </nav>
       </header>
 
+      <div class="spacing-head">
 
+      </div>
       <!-- HOME PAGE -->
       <section ng-show="main.showHomePage">
          <h3>Welcome to the Home Page</h3>
          <h2 ng-click="main.openBrewerySearch()">Find A Brewery</h2>
+         <img ng-click="main.openBrewerySearch()" src="http://calgarybuzz.com/wp-content/uploads/2016/01/shutterstock_brewery-984x500.jpg" alt="">
          <h2 ng-click="main.openBeerSearch()">Find A Beer</h2>
+         <img ng-click="main.openBeerSearch()" src="http://fullthrottlebottles.com/images/beer-bottles.jpg" alt="">
          <h2 ng-click="main.openLoginPage()">Login</h2>
       </section>
 
 
       <!-- BREWERIES SEARCH-->
-      <section class="brewery-search" ng-controller="BreweryDBController as breweryCtrl">
+      <section ng-show="main.showBreweries" class="brewery-search" ng-controller="BreweryDBController as breweryCtrl">
          <div class=""  ng-show="main.showBrewerySearch">
-            <h3>Search For A Brewery</h3>
-            <form ng-submit=breweryCtrl.getBreweriesByZip(zipCode)>
-               <input type="text" ng-model="zipCode" placeholder="Search by zip code">
-               <input type="submit" name="" value="Search">
-            </form>
+            <div class="Search Menu">
+               <h3>Search For A Brewery</h3>
+               <form ng-submit=breweryCtrl.getBreweriesByZip(zipCode)>
+                  <input type="text" ng-model="zipCode" placeholder="Search by zip code">
+                  <input type="submit" name="" value="Search">
+               </form>
+            </div>
             <ul>
                <li class="items" ng-repeat="results in breweryCtrl.breweries">
                   <h3 ng-click="main.openThisBrewery(results, breweryCtrl)">{{results.brewery.name}}<br></h3>
@@ -73,7 +79,6 @@
 
       <!-- BEER PAGE -->
       <section ng-show="main.showBeerPage">
-         test
         <ng-include src="'./partials/beers.html'"></ng-include>
       </section>
 
@@ -103,12 +108,15 @@
      <!-- <section>
 
      </section> -->
+     <div class="spacing">
 
-     <!-- <section class="footer"> -->
-        <!-- <footer> -->
+     </div>
+
+     <section class="footer">
+        <footer>
            <!-- NEED TO STATE THAT WE ARE USING THE API -->
-            <!-- <a href="https://www.breweryDB.com"><img src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png" alt=""></a> -->
-        <!-- </footer> -->
-     <!-- </section> -->
+            <a href="https://www.breweryDB.com"><img src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png" alt=""></a>
+        </footer>
+     </section>
    </body>
 </html>

@@ -119,5 +119,4 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
   // }
 
 
-
 }]);
