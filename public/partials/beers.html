@@ -7,13 +7,19 @@
 
     <!-- beer search form -->
     <div ng-show="displayCtrl.showSearchForm">
-      {{displayCtrl}}
       <h3>Search For A Beer</h3>
-      <form ng-submit="beerCtrl.getBeerByName(beerName)">
-        <input type="text" ng-model="beerName" placeholder="Beer name">
+      <form ng-submit="beerCtrl.findBeer()">
+        <input type="text" ng-model="beerCtrl.searchForBeer" placeholder="Beer name"> or <br>
+        <input type="text" ng-model="beerCtrl.searchByBrewery" placeholder="Brewery Name"><br>
 
         <input ng-click="" type="submit" name="search" value="Find Beer">
+
       </form>
+      <button ng-click="beerCtrl.clearSearchForm()">Clear Search</button>
+
+      <div ng-show="beerCtrl.foundNoBeers">
+        We didn't find any beers matching your beer name.
+      </div>
 
       <ul>
         <li ng-repeat="beer in beerCtrl.beers">
@@ -25,9 +31,13 @@
     <!-- beer details form -->
     <div ng-show="displayCtrl.showDetailsForm">
       <h3>{{beerCtrl.selectedBeer.name}} - {{beerCtrl.selectedBeer.style}}</h3>
-
+      Brewery: {{beerCtrl.selectedBeer.brewery}}<br>
+      ABV: {{beerCtrl.selectedBeer.abv}}<br>
+      IBU: {{beerCtrl.selectedBeer.ibu}}<br>
       {{beerCtrl.selectedBeer.description}}
 
+      <!-- TODO: Add click to button -->
+      <button ng-click="">Add To Favorites</button>
       <button ng-click="displayCtrl.backToSearchForm()">Back To Search</button>
     </div>
   </div>
