@@ -67,6 +67,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
   )};
 
 
+  // Get the brewery that makes the beer using the brewerydb beer id
   this.getBreweryByBeerID = function(beerID) {
     var urlStr = "/breweries/proxy/v2/beer/" + beerID + "/breweries";
 
@@ -82,6 +83,8 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
     }
   )};
 
+
+  // Get all of the beers that a brewery makes. Search by brewery name
   this.getBeersByBrewery = function() {
     controller.beers = [];
     var urlStr = "/breweries/proxy/v2/breweries?name=" + controller.searchByBrewery;
@@ -98,6 +101,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
     })
   }
 
+  // Get the beers a brewery makes. Search for brewery by breweryDB brewery id
   this.getBreweryBeers = function(breweryID) {
     var urlStr = "/breweries/proxy/v2/brewery/" + breweryID + "/beers";
 
@@ -119,6 +123,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
 
 }]);
 
+// This controller controls what is displayed.
 angular.module('BreweryApp'). controller('BeerDisplayController', function() {
   this.showSearchForm = true;
   this.showDetailsForm = false;
