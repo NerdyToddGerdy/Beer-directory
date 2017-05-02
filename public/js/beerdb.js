@@ -12,6 +12,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
     controller.searchForBeer = "";
     controller.beers = [];
     this.searchByBrewery = "";
+    this.foundNoBeers = false;
   }
 
   // Takes the results of a search and puts the data into objects that match
