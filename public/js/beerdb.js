@@ -7,12 +7,15 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
   this.searchForBeer = "";
   this.searchByBrewery = "";
 
+  // Clears the text boxes and sets the beer list to an empty array
   this.clearSearchForm = function() {
     controller.searchForBeer = "";
     controller.beers = [];
     this.searchByBrewery = "";
   }
 
+  // Takes the results of a search and puts the data into objects that match
+  // the mongo model. Adds the beers to the beer list.
   this.addFoundBeersToList = function(data) {
     for (var i = 0; i < data.length; i++ ) {
       var newBeer = {
@@ -26,6 +29,8 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
     }
   }
 
+  // Called when beer search form is submitted
+  // Search by name has priority over search by brewery
   this.findBeer = function() {
     if (this.searchForBeer !== "") {
       this.getBeerByName();
@@ -34,6 +39,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
     }
   }
 
+  // Gets beer by name from brewerydb. Gets brewery that makes the beer.
   this.getBeerByName = function() {
     var urlStr = '/breweries/proxy/v2/beers?name=' + controller.searchForBeer;
 
@@ -43,6 +49,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
     }).then( function(response) {
       controller.beers = [];
 
+      // check if beer was found
       if (response.data.hasOwnProperty('data')) {
         controller.foundNoBeers = false;
       }
@@ -50,13 +57,15 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
         controller.foundNoBeers = true;
         return;
       }
+
       controller.addFoundBeersToList(response.data.data);
       controller.getBreweryByBeerID(response.data.data[0].id);
     }, function(response) {
       console.log("Get beer by name failed", response);
       controller.beers = [];
     }
-    )};
+  )};
+
 
   this.getBreweryByBeerID = function(beerID) {
     var urlStr = "/breweries/proxy/v2/beer/" + beerID + "/breweries";
