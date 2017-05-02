@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 
 console.clear();
@@ -57,11 +55,9 @@ app.controller('UserController', ['$http', function($http){
 
 
 }]); // end of user controller
-=======
-var app = angular.module('BreweryApp', []);
-=======
+
 var app = angular.module('BreweryApp', ['ngAnimate']);
->>>>>>> 739ac3cf5d077c5daf8360298fcffed0bb870404
+
 app.controller('MainController', ['$http', function($http){
    this.showBrewerySearch = false;
    this.showHomePage = true;
@@ -118,4 +114,3 @@ app.controller('MainController', ['$http', function($http){
       //enlarge selected brewery and add data
    };
 }]);
->>>>>>> 4961dd80a4089fb5522235514a02222019b9926d
