@@ -37,7 +37,8 @@ app.get('/', function(req, res){
   res.redirect('/index.html');
 })
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/brewerydb');
+var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/brewerydb';
+mongoose.connect(mongoUri);
 mongoose.connection.once('open', function(){
   console.log('Brewery app is connected to mongoodb');
 });
@@ -45,5 +46,7 @@ mongoose.connection.once('open', function(){
 
 
 app.listen(port, function(){
-    console.log('Server is listening...', port);
+  console.log('--------------------------');
+  console.log('Server running on port: ' + port);
+  console.log('--------------------------');
 });
