@@ -44,7 +44,7 @@ this.initialize = function (_address) {
   console.log('trying to display map with : ', _address);
   var geocoder;
   var map;
-  var address = _address // test : 1060 West Addison Street, Chicago, IL
+  var address = _address; // test : 1060 West Addison Street, Chicago, IL
    geocoder = new google.maps.Geocoder();
    var latlng = new google.maps.LatLng(-34.397, 150.644);
    var myOptions = {

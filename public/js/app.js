@@ -22,7 +22,7 @@ app.controller('UserController', ['$http', function($http){
             console.log("this is respnse " , response);
         }, function(error){ //fail
             console.log("angualr: err " , error);
-            alert('The user name is already taken')
+            alert('The user name is already taken');
         });
         this.userName = "";
         this.password = "";
@@ -81,6 +81,7 @@ app.controller('MainController', ['$http', function($http){
       this.showLoginForm = false;
       this.showBeerPage = false;
       this.showBreweryPage = false;
+      this.showBreweries = false;
    };
    this.openBrewerySearch = function(){
       this.showBrewerySearch = true;
@@ -88,6 +89,7 @@ app.controller('MainController', ['$http', function($http){
       this.showHomePage = false;
       this.showBeerPage = false;
       this.showBreweryPage = false;
+      this.showBreweries = true;
    };
    this.openBeerSearch = function(){
       this.showHomePage = false;
@@ -95,6 +97,7 @@ app.controller('MainController', ['$http', function($http){
       this.showLoginForm = false;
       this.showBeerPage = true;
       this.showBreweryPage = false;
+      this.showBreweries = false;
    };
    this.openLoginPage = function(){
       this.showBrewerySearch = false;
@@ -102,6 +105,7 @@ app.controller('MainController', ['$http', function($http){
       this.showHomePage = false;
       this.showBeerPage = false;
       this.showBreweryPage = false;
+      this.showBreweries = false;
    };
    this.openThisBrewery = function(results, breweryCtrl){
       // console.log(breweryCtrl);
