@@ -25,14 +25,14 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
   // State must be full name, not abreviation. Use "Colorado" instead of "CO"
   this.getBreweriesByState = function(state){
     var urlStr = '/breweries/proxy/v2/locations?region=' + state;
-
+    this.breweries = [];
     $http({
       method: 'GET',
       url: urlStr
     }).then( function(response) {
-      console.log("breweries by state:", response);
-      controller.breweries = response.data.data;
-      console.log("response.data.data: ", controller.breweries);
+      if (response.data.hasOwnProperty('data')) {
+        controller.breweries = response.data.data;
+      }
     }, function( response) {
       console.log("getBreweriesByState failed: ", response);
     })
@@ -40,13 +40,16 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
 
   // Get a list of breweries by City, State
   this.getBreweriesByCityState = function( city, state) {
+    this.breweries = [];
     var urlStr = '/breweries/proxy/v2/locations?region=' + state + "&locality=" + city;
 
     $http({
       method: 'GET',
       url: urlStr
     }).then( function( response) {
-      controller.breweries = response.data.data;
+      if (response.data.hasOwnProperty('data')) {
+        controller.breweries = response.data.data;
+      }
     }, function( response) {
       console.log("getBreweriesByCityState failed: ", response);
     })
