@@ -37,7 +37,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
   // log in section
   this.logIn = function(){
     console.log("controller pwd ", this.password);
-    $cookies.put("pwd", controller.password); // set pwd for cookies
+    var pwd = this.password;
     $http({
       method:'POST',
       url:'/sessions',
@@ -46,21 +46,22 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
         password: this.password,
       }
     }).then(function(response){ //success
-      if(response.data == "User is not found") {
-        alert('User is not found')
-      }else {
-
+      console.log("respnse from log in ", response);
+      if(response.data == "Invalid") {
+        alert('Invalid username/password');
+        $window.location.reload();
+      }
+      else {
         controller.currentUser = response.data.currentuser; // get currrent user information
         $cookies.put('logInSuccess', true);
         $cookies.put("username", response.data.currentuser.username);// set cookies username
         $cookies.put("showGreeting", true);
+        $cookies.put("pwd", pwd); // set pwd for cookies
         controller.showGreeting = true;
-        //       console.log('current User is: ', controller.currentUser);
       }
-      console.log('from log in: ', response.data);
     }, function(error){ //fail
       console.log("wrong user name or password");
-      alert("wrong user name or password")
+      $window.location.reload();
     });
     this.userName = "";
     this.password = "";
@@ -106,6 +107,8 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
 
   //set cookie section
   if ($cookies.get('logInSuccess')){
+    console.log("it is run again??");
+    console.log($cookies.get("logInSuccess"));
     this.userName = $cookies.get("username");
     this.password = $cookies.get("pwd");
     this.showGreeting = $cookies.get("showGreeting");

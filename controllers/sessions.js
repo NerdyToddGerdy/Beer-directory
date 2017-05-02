@@ -16,9 +16,9 @@ router.post('/', function(req, res){
         if( bcrypt.compareSync(req.body.password, foundUser.password) ){
             req.session.currentuser = foundUser;
             res.json(req.session);
-        }
+        }else {  res.json("Invalid");}
       }else{
-        res.json("User is not found");
+        res.json("Invalid");
       }
     });
 });
