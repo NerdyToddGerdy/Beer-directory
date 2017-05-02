@@ -1,10 +1,5 @@
-
-
-console.clear();
-var app = angular.module('MyApp', []);
-
 // User Registration controller
-app.controller('UserController', ['$http', function($http){
+angular.module('BreweryApp').controller('UserController', ['$http', function($http){
   this.showRegisterForm = false;
   this.showLoginForm = false;
   this.isAdmin =false;
@@ -22,7 +17,7 @@ app.controller('UserController', ['$http', function($http){
             console.log("this is respnse " , response);
         }, function(error){ //fail
             console.log("angualr: err " , error);
-            alert('The user name is already taken')
+            alert('The user name is already taken');
         });
         this.userName = "";
         this.password = "";
@@ -46,7 +41,7 @@ app.controller('UserController', ['$http', function($http){
        console.log(response.data);
    }, function(error){ //fail
         console.log("wrong user name or password");
-        alert("wrong user name or password")
+        alert("wrong user name or password");
    });
    this.userName = "";
    this.password = "";
