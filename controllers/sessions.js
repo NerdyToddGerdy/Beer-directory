@@ -3,9 +3,9 @@ var router = express.Router();
 var Users = require('../models/users.js');
 var bcrypt = require('bcrypt');
 
-// router.get('/new', function(req, res){
-//     res.render('sessions/new.ejs');
-// });
+router.get('/new', function(req, res){
+    res.render('sessions/new.ejs');
+});
 
 
 // user log in section
@@ -15,17 +15,18 @@ router.post('/', function(req, res){
         console.log('found user as ', foundUser.username);
         if( bcrypt.compareSync(req.body.password, foundUser.password) ){
             req.session.currentuser = foundUser;
-            res.json(req.session);
-        }else {  res.json("Invalid");}
+          //  console.log('found user :', foundUser.username);
+            //res.redirect('/');
+            res.json(req.session.currentuser );
+        }
       }else{
-        res.json("Invalid");
+        res.json("user is not found");
       }
     });
 });
 
 //user log out
 router.delete('/', function(req, res){
-  console.log("DELETE SESSION when log out");
     req.session.destroy(function(){
         res.redirect('/');
     });
