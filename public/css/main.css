@@ -78,12 +78,4 @@ body {
   body .spacing-head {
     height: 11em; }
 
-
-/*this reservers for google map */
-  #brewery_map {
-    height: 200px;
-    width: 50%;
-    border: 1px solid black;
-  }
-
 /*# sourceMappingURL=main.css.map */
