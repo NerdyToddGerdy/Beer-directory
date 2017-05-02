@@ -4,7 +4,6 @@ app.controller('MainController', ['$http', function($http){
    this.showHomePage = true;
    this.showBeerPage = false;
    this.isAdmin =false;
-   this.currentBrewery = false;
    this.getBreweries = function(brew){
       console.log(brew);
       $http({
@@ -14,8 +13,6 @@ app.controller('MainController', ['$http', function($http){
          console.log(response);
       });
    };
-
-
    this.openHomePage = function(){
       this.showHomePage = true;
       this.showBrewerySearch = false;
@@ -40,10 +37,7 @@ app.controller('MainController', ['$http', function($http){
       this.showHomePage = false;
       this.showBeerPage = false;
    };
-   this.openThisBrewery = function(data){
+   this.openThisBrewery = function(){
       console.log('this brewery');
-      console.log(data.brewery);
-      //Hide non selected breweries
-      //enlarge selected brewery and add data
    };
 }]);

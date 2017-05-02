@@ -41,14 +41,13 @@
          </form>
          <ul>
             <li class="items" ng-repeat="results in breweryCtrl.breweries">
-               <h3 ng-click="main.openThisBrewery(results)">{{results.brewery.name}}<br></h3>
-               <img ng-click="main.openThisBrewery(results)" ng-src="{{results.brewery.images.squareMedium}}" alt="{{results.brewery.name}}"/>
+               <h3 ng-click="main.openThisBrewery()">{{results.brewery.name}}<br></h3>
+               <img ng-click="main.openThisBrewery()" ng-src="{{results.brewery.images.squareMedium}}" alt="{{results.brewery.name}}"/>
                <h4>{{results.streetAddress}}</h4>
                <h4>{{results.locality}}, {{results.region}} {{results.postalCode}}</h4>
             </li>
          </ul>
       </section>
-      
 
 
       <!-- BEER PAGE -->
@@ -83,11 +82,11 @@
 
      </section> -->
 
-     <!-- <section class="footer"> -->
-        <!-- <footer> -->
+     <section class="footer">
+        <footer>
            <!-- NEED TO STATE THAT WE ARE USING THE API -->
-            <!-- <a href="https://www.breweryDB.com"><img src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png" alt=""></a> -->
-        <!-- </footer> -->
-     <!-- </section> -->
+           <a href="https://www.breweryDB.com"><img src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png" alt=""></a>
+        </footer>
+     </section>
    </body>
 </html>
