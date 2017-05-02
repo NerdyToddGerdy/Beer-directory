@@ -1,8 +1,3 @@
-// var app = angular.module('BreweryApp', ['ngCookies']);
-
-// User Registration controller
-// angular.module('BreweryApp').controller('BreweryDBController', ['$http', function($http) {
-// app.controller('UserController', ['$http', '$cookies', '$window',function($http, $cookies, $window){
 
 angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$window",  function($http, $cookies, $window){
 
@@ -51,6 +46,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
         $window.location.reload();
       }
       else {
+       console.log('login success');
         controller.currentUser = response.data.currentuser; // get currrent user information
         $cookies.put('logInSuccess', true);
         $cookies.put("username", response.data.currentuser.username);// set cookies username
@@ -73,6 +69,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     $cookies.remove('pwd');
     $cookies.remove('showGreeting');
     $cookies.remove('logInSuccess');
+    $cookies.remove("showLoginForm");
     $http({
       method:'POST',
       url:'/sessions?_method=DELETE',
@@ -102,6 +99,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
   this.resetLoginForm = function(){
     controller.showRegisterForm = !controller.showRegisterForm;
     controller.showLoginForm = !controller.showLoginForm;
+
   }
 
   //set cookie section
