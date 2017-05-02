@@ -31,16 +31,11 @@ app.use('/sessions', sessionsController);
 var usersController = require('./controllers/users.js');
 app.use('/users', usersController);
 
-// app.get('/', function(req, res){
-//   console.log('redirect to index.html, and user is ', req.session.currentuser);
-//     res.redirect('index.html', {
-//         currentUser: req.session.currentuser
-//     });
-// });
+
 // load index page
-// app.get('/', function(req, res){
-//   res.redirect('/index.html');
-// })
+app.get('/', function(req, res){
+  res.redirect('/index.html');
+})
 var mongoose = require('mongoose');
 var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/brewerydb';
 mongoose.connect(mongoUri);
