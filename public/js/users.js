@@ -53,7 +53,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
         controller.currentUser = response.data.currentuser; // get currrent user information
         $cookies.put('logInSuccess', true);
         $cookies.put("username", response.data.currentuser.username);// set cookies username
-
+        $cookies.put("showGreeting", true);
         controller.showGreeting = true;
         //       console.log('current User is: ', controller.currentUser);
       }
@@ -68,9 +68,10 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
 
   this.logout = function(){
     // clean cookies
-    alert('trying to log out');
+    alert('Are you sure you want to log out?');
     $cookies.remove('username');
     $cookies.remove('pwd');
+    $cookies.remove('showGreeting');
     $cookies.remove('logInSuccess');
     $http({
       method:'POST',
@@ -95,18 +96,20 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
   this.resetRegisterForm = function (){
     controller.showRegisterForm = !controller.showRegisterForm;
     controller.showLoginForm = !controller.showLoginForm;
+
   }
 
   this.resetLoginForm = function(){
     controller.showRegisterForm = !controller.showRegisterForm;
     controller.showLoginForm = !controller.showLoginForm;
   }
+
   //set cookie section
   if ($cookies.get('logInSuccess')){
-    console.log('on reload');
-    console.log("this is a pwd: ", $cookies.get("pwd"));
     this.userName = $cookies.get("username");
     this.password = $cookies.get("pwd");
+    this.showGreeting = $cookies.get("showGreeting");
+    console.log( "show greeting ",  $cookies.get("showGreeting"));
     this.logIn();
   }
 
