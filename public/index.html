@@ -4,11 +4,14 @@
       <meta charset="utf-8">
       <title></title>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js" charset="utf-8"></script>
       <script src="js/app.js" charset="utf-8"></script>
       <script src="js/brewerydb.js" charset="utf-8"></script>
       <script src="js/beerdb.js" charset="utf-8"></script>
       <link href="https://fonts.googleapis.com/css?family=Diplomata+SC|Fascinate+Inline|Fredericka+the+Great|Sirin+Stencil|Vast+Shadow" rel="stylesheet">
       <link rel="stylesheet" href="css/main.css">
+      <link rel="stylesheet" href="/css/animate.css">
+      <link rel="stylesheet" href="/css/testAnimate.css">
    </head>
 
 
@@ -29,30 +32,46 @@
       <!-- HOME PAGE -->
       <section ng-show="main.showHomePage">
          <h3>Welcome to the Home Page</h3>
+         <h2 ng-click="main.openBrewerySearch()">Find A Brewery</h2>
+         <h2 ng-click="main.openBeerSearch()">Find A Beer</h2>
+         <h2 ng-click="main.openLoginPage()">Login</h2>
       </section>
 
 
       <!-- BREWERIES SEARCH-->
-      <section class="brewery-search" ng-show="main.showBrewerySearch" ng-controller="BreweryDBController as breweryCtrl">
-         <h3>Search For A Brewery</h3>
-         <form ng-submit=breweryCtrl.getBreweriesByZip(zipCode)>
-            <input type="text" ng-model="zipCode" placeholder="Search by zip code">
-            <input type="submit" name="" value="Search">
-         </form>
-         <ul>
-            <li class="items" ng-repeat="results in breweryCtrl.breweries">
-               <h3 ng-click="main.openThisBrewery(results)">{{results.brewery.name}}<br></h3>
-               <img ng-click="main.openThisBrewery(results)" ng-src="{{results.brewery.images.squareMedium}}" alt="{{results.brewery.name}}"/>
-               <h4>{{results.streetAddress}}</h4>
-               <h4>{{results.locality}}, {{results.region}} {{results.postalCode}}</h4>
-            </li>
-         </ul>
+      <section class="brewery-search" ng-controller="BreweryDBController as breweryCtrl">
+         <div class=""  ng-show="main.showBrewerySearch">
+            <h3>Search For A Brewery</h3>
+            <form ng-submit=breweryCtrl.getBreweriesByZip(zipCode)>
+               <input type="text" ng-model="zipCode" placeholder="Search by zip code">
+               <input type="submit" name="" value="Search">
+            </form>
+            <ul>
+               <li class="items" ng-repeat="results in breweryCtrl.breweries">
+                  <h3 ng-click="main.openThisBrewery(results, breweryCtrl)">{{results.brewery.name}}<br></h3>
+                  <img ng-click="main.openThisBrewery(results, breweryCtrl)" ng-src="{{results.brewery.images.squareMedium}}" alt="{{results.brewery.name}}"/>
+                  <h4>{{results.streetAddress}}</h4>
+                  <h4>{{results.locality}}, {{results.region}} {{results.postalCode}}</h4>
+               </li>
+            </ul>
+         </div>
+         <!-- BREWERIES SHOW PAGE -->
+         <section class="breweryShowSection" ng-show="main.showBreweryPage">
+            <img ng-src="{{breweryCtrl.currentBrewery1.brewery.images.squareLarge}}" alt="">
+            <h3>{{breweryCtrl.currentBrewery1.brewery.name}}</h3>
+            <h3>{{breweryCtrl.currentBrewery1.streetAddress}}</h3>
+            <h3>{{breweryCtrl.currentBrewery1.locality}}, {{breweryCtrl.currentBrewery1.region}} {{breweryCtrl.currentBrewery1.postalCode}}</h3>
+            <h3>{{breweryCtrl.currentBrewery1.brewery.desription}}</h3>
+            <h3><a href="{{breweryCtrl.currentBrewery1.website}}">{{breweryCtrl.currentBrewery1.website}}</a></h3>
+            <h3>Phone Number: {{breweryCtrl.currentBrewery1.phone}}</h3>
+            <button ng-click="main.openBrewerySearch()">Back to Breweries</button>
+         </section>
       </section>
-      
 
 
       <!-- BEER PAGE -->
       <section ng-show="main.showBeerPage">
+         test
         <ng-include src="'./partials/beers.html'"></ng-include>
       </section>
 
