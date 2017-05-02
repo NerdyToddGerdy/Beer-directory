@@ -1,9 +1,3 @@
-console.clear();
-// var app = angular.module('BreweryApp', ['ngCookies']);
-
-// User Registration controller
-// angular.module('BreweryApp').controller('BreweryDBController', ['$http', function($http) {
-// app.controller('UserController', ['$http', '$cookies', '$window',function($http, $cookies, $window){
 
 angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$window",  function($http, $cookies, $window){
 
