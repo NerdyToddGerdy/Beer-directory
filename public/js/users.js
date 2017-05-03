@@ -47,7 +47,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
       }
       else {
 
-        for(var k in response.data.currentuser) currentUser[k]=response.data.currentuser[k];
+        for(var i in response.data.currentuser) currentUser[i]=response.data.currentuser[i];
         console.log("Global currentUser", currentUser);
         $cookies.put('logInSuccess', true);
         $cookies.put("username", response.data.currentuser.username);// set cookies username
@@ -62,9 +62,6 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     });
     this.userName = "";
     this.password = "";
-    currentUser = this.currentUser;
-    console.log('currentUser: ', currentUser);
-    console.log('this.currentUser: ', this.currentUser);
   };
 
   this.logout = function(){

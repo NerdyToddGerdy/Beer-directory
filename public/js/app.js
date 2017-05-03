@@ -1,7 +1,5 @@
 
-
 var app = angular.module('BreweryApp', ['ngAnimate', 'ngCookies']);
-this.currentUser = currentUser;
 
 app.controller('MainController', ['$http', function($http){
    this.showBrewerySearch = false;
@@ -35,6 +33,7 @@ app.controller('MainController', ['$http', function($http){
       this.showBeerPage = false;
       this.showBreweryPage = false;
       this.showBreweries = true;
+      console.log('currentUser in app.js: ', currentUser);  // testing purpose
    };
    this.openBeerSearch = function(){
       this.showHomePage = false;
@@ -43,6 +42,7 @@ app.controller('MainController', ['$http', function($http){
       this.showBeerPage = true;
       this.showBreweryPage = false;
       this.showBreweries = false;
+      console.log('currentUser in app.js: ', currentUser);  // testing purpose
    };
    this.openLoginPage = function(){
       this.showBrewerySearch = false;
