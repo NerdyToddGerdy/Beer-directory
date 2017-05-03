@@ -104,7 +104,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
       console.log("getBeersByBrewery failed", response);
     })
   }
- console.log('currentUser in beerdb.js: ', currentUser);  // testing purpose
+
   // Get the beers a brewery makes. Search for brewery by breweryDB brewery id
   this.getBreweryBeers = function(breweryID) {
     var urlStr = "/breweries/proxy/v2/brewery/" + breweryID + "/beers";
@@ -125,17 +125,35 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
     })
   }
 
+  // save beer as a favorite
+  this.saveFavoriteBeer = function() {
+    var urlStr = '/users/beers/' + currentUser._id;
+
+    $http({
+      method: 'PUT',
+      url: urlStr,
+      data: {beers:  this.selectedBeer }
+    }).then(function(response) {
+      console.log("beer saved as favorite");
+    }, function(response) {
+      console.log("saveFavoriteBeer failed: ", response);
+    })
+  }
+
 }]);
 
 // This controller controls what is displayed.
 angular.module('BreweryApp'). controller('BeerDisplayController', function() {
   this.showSearchForm = true;
   this.showDetailsForm = false;
+  this.showAddFavButton = false;
+
 
   this.showDetails = function(ctrl, curBeer) {
     this.showSearchForm = false;
     this.showDetailsForm = true;
     ctrl.selectedBeer = curBeer;
+    this.showAddFavButton = Object.keys(currentUser).length !== 0
   };
 
   this.backToSearchForm = function(){
