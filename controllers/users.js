@@ -21,9 +21,10 @@ router.post('/', function(req, res){
 router.put('/beers/:id', function(req, res){
   Users.findById(req.params.id, function(err, updatedUser){
     if(updatedUser){
-      updatedUser.beers = [];
-      updatedUser.beers = req.body.beers;
-      updateUser.save();
+      // updatedUser.beers = [];
+      // updatedUser.beers = req.body.beers;
+      updatedUser.beers.push(req.body.beers);
+      updatedUser.save();
       res.json(updatedUser);
     }
     else {
@@ -36,8 +37,9 @@ router.put('/beers/:id', function(req, res){
 router.put('/breweries/:id', function(req, res){
   Users.findById(req.params.id, function(err, updatedUser){
     if(updatedUser){
-      updatedUser.breweries = [];
-      updatedUser.breweries = req.body.breweries;
+      // updatedUser.breweries = [];
+      // updatedUser.breweries = req.body.breweries;
+      updateUser.breweries.push(req.body.breweries);
       updateUser.save();
       res.json(updatedUser);
     }
