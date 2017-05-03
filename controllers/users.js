@@ -16,9 +16,43 @@ router.post('/', function(req, res){
     }
     });
 });
-
-
-
-
+//====================================================
+//update beers record
+router.put('/beers/:id', function(req, res){
+  Users.findById({req.params.id}, function(err, updatedUser){
+     if(updatedUser){
+       updatedUser.beers = [];
+       updatedUser.beers = req.body.beers;
+       updateUser.save();
+       res.json(updatedUser);
+     }
+  });
+});
+//update breweries record
+//====================================================
+router.put('/breweries/:id', function(req, res){
+  Users.findById({req.params.id}, function(err, updatedUser){
+     if(updatedUser){
+       updatedUser.breweries = [];
+       updatedUser.breweries = req.body.breweries;
+       updateUser.save();
+       res.json(updatedUser);
+     }
+  });
+});
+//====================================================
+//get record by id
+router.get ('/:id', function(req, res){
+  Users.find({}, function(err, foundUser){
+    res.json(foundUser);
+  });
+//====================================================
+// delete record
+router.delete('/:id', function(req, res){
+  Users.findByIdAndRemove(req.params.id, function(err, deletedUser){
+    res.json(deletedUser);
+  });
+})
+//====================================================
 
 module.exports = router;
