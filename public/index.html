@@ -107,8 +107,7 @@
       </form>
     </div>
     <div ng-show='userCtrl.showGreeting'>
-      show this when log <br>
-      Welcome {{userCtrl.currentUser}}
+      Welcome {{userCtrl.userName}}
       <button ng-click='userCtrl.logout()'type="button" name="button">Log out</button>
     </div>
   </div>
@@ -116,12 +115,7 @@
 
 <!-- PROFILE -->
 <section>
-<p>Current User Infor (testing)</p>
-</section>
-<div class="spacing">
-  Welcome:
-<p>  {{main.currentUser}} </p>
-</div>
+
 
 <section class="footer">
   <footer>
