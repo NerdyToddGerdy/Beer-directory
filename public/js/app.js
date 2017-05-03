@@ -63,6 +63,7 @@ app.controller('MainController', ['$http', function($http){
    this.showBeerPage = false;
    this.isAdmin =false;
    this.currentBrewery = false;
+   this.controller = this;
    this.getBreweries = function(brew){
       console.log(brew);
       $http({
@@ -72,8 +73,6 @@ app.controller('MainController', ['$http', function($http){
          console.log(response);
       });
    };
-
-
    this.openHomePage = function(){
       this.showHomePage = true;
       this.showBrewerySearch = false;
@@ -115,5 +114,18 @@ app.controller('MainController', ['$http', function($http){
       console.log(breweryCtrl.currentBrewery1);
 
       //enlarge selected brewery and add data
+   };
+   this.fromBeerToBrewery = function(name) {
+     var urlStr = 'breweries/proxy/v2/breweries?name=' + name;
+     var controller = this;
+     $http({
+      method: 'GET',
+      url: urlStr
+     }).then( function(response) {
+      controller.brewery = response.data.data[0].name;
+      console.log(controller.breweries);
+     }, function(response) {
+      console.log("fromBeerToBrewery failed:", response);
+     });
    };
 }]);

@@ -79,7 +79,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
         controller.beers[0].brewery = response.data.data[0].name;
       }
     }, function(response) {
-      console.log("getBreweryByBeerID failed:", resonse);
+      console.log("getBreweryByBeerID failed:", response);
     }
   )};
 

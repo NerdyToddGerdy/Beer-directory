@@ -60,7 +60,17 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
       method: 'GET',
       url: urlStr
     }).then( function(response) {
-      controller.breweries = response.data;
+      controller.breweries = response.data.data[0];
+      console.log(controller.breweries);
+      // start of test
+      $http({
+         method: 'GET',
+         url: 'breweries/proxy/v2/brewery/' + controller.breweries.id
+      }).then(function(newResponse){
+         controller.thisBrewery = newResponse.breweryId;
+         console.log(controller.thisBrewery, 'thisBrewery');
+      });
+      // end of test
     }, function(response) {
       console.log("getBreweryByName failed:", response);
     });
