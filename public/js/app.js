@@ -1,5 +1,8 @@
 
+
 var app = angular.module('BreweryApp', ['ngAnimate', 'ngCookies']);
+this.currentUser = currentUser;
+
 app.controller('MainController', ['$http', function($http){
    this.showBrewerySearch = false;
    this.showHomePage = true;

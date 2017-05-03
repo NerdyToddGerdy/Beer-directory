@@ -6,6 +6,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js" charset="utf-8"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-cookies.min.js"></script>
+  <script src="js/global.js" charset="utf-8"></script>
   <script src="js/app.js" charset="utf-8"></script>
   <script src="js/users.js" charset="utf-8"></script>
   <script src="js/brewerydb.js" charset="utf-8"></script>
@@ -107,18 +108,19 @@
     </div>
     <div ng-show='userCtrl.showGreeting'>
       show this when log <br>
-      Welcome {{userCtrl.currentUser.username}}
+      Welcome {{userCtrl.currentUser}}
       <button ng-click='userCtrl.logout()'type="button" name="button">Log out</button>
     </div>
   </div>
 </section>
 
 <!-- PROFILE -->
-<!-- <section>
-
-</section> -->
+<section>
+<p>Current User Infor (testing)</p>
+</section>
 <div class="spacing">
-
+  Welcome:
+<p>  <%=currentUser.username%> </p>
 </div>
 
 <section class="footer">
