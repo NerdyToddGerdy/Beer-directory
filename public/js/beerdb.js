@@ -104,7 +104,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
       console.log("getBeersByBrewery failed", response);
     })
   }
- console.log('currentUser in beerdb.js: ', currentUser);  // testing purpose
+
   // Get the beers a brewery makes. Search for brewery by breweryDB brewery id
   this.getBreweryBeers = function(breweryID) {
     var urlStr = "/breweries/proxy/v2/brewery/" + breweryID + "/beers";
