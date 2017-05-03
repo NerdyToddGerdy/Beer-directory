@@ -93,6 +93,10 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     $window.location.reload();
   }// end of logout
 
+
+  this.getCurrentUserInfo = function (userId){
+    
+  }
   this.resetRegisterForm = function (){
     controller.showRegisterForm = !controller.showRegisterForm;
     controller.showLoginForm = !controller.showLoginForm;
