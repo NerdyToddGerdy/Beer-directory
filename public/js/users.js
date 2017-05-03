@@ -8,7 +8,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
   this.showRegisterForm = false;
   this.showLoginForm = true;
   this.isAdmin =false;
-
+  this.logInSuccess = false;
   this.addUser = function(){
     console.log('add user');
     $http({
@@ -47,7 +47,9 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
       else {
         // copy loggedin user's info
         for(var i in response.data.currentuser) currentUser[i]=response.data.currentuser[i];
-        console.log("Global currentUser", currentUser);
+        for(var ii in response.data.currentuser) controller.currentUser[ii]=response.data.currentuser[i];
+        console.log("local currentUser", controller.currentUser);
+        this.logInSuccess = true;
         controller.userName = currentUser.username;
         $cookies.put('logInSuccess', true);
         $cookies.put("username", response.data.currentuser.username);// set cookies username
@@ -102,7 +104,30 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     controller.showRegisterForm = !controller.showRegisterForm;
     controller.showLoginForm = !controller.showLoginForm;
   }
+//------------------------------------------------------
+this.removeBeer = function (removeBeerName){
+  console.log('current user hold beers', currentUser.beers);
+  var urlStr = '/users/beers/remove/' + currentUser._id;
+  var _beers = currentUser.beers;
+  for (var i = 0; i < _beers. length; i ++){
+    if (_beers[i].name === removeBeerName){
+      _beers.splice(i,1);
+      break;
+    }
+  }
+  console.log("beers after remove ", _beers);
+   $http({
+     method: 'PUT',
+     url: urlStr,
+     data: {beers:  this.selectedBeer }
+   }).then(function(response) {
+     console.log("beer is removed");
+   }, function(response) {
+     console.log("failed to delete beer", response);
+   })
+}
 
+  //------------------------------------------------------
   //set cookie section
   if ($cookies.get('logInSuccess')){
     console.log("it is run again??");
@@ -113,6 +138,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     console.log( "show greeting ",  $cookies.get("showGreeting"));
     this.logIn();
   }
+
 
 
 }]); // end of user controller

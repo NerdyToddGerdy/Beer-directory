@@ -111,7 +111,11 @@
     <div ng-show='userCtrl.showGreeting'>
       Welcome {{userCtrl.userName}}
       <button ng-click='userCtrl.logout()'type="button" name="button">Log out</button>
+      <ng-include src="'./partials/profile.html'"></ng-include>
     </div>
+
+
+
   </div>
 </section>
 
