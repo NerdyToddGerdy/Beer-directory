@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-
 <html ng-app='BreweryApp'>
 <head>
    <meta charset="utf-8">
    <title></title>
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js" charset="utf-8"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-cookies.min.js"></script>
+   <script src="js/global.js" charset="utf-8"></script>
    <script src="js/app.js" charset="utf-8"></script>
+   <script src="js/users.js" charset="utf-8"></script>
    <script src="js/brewerydb.js" charset="utf-8"></script>
    <script src="js/beerdb.js" charset="utf-8"></script>
    <link href="https://fonts.googleapis.com/css?family=Diplomata+SC|Fascinate+Inline|Fredericka+the+Great|Sirin+Stencil|Vast+Shadow" rel="stylesheet">
@@ -82,7 +84,7 @@
                   <li></li>
                </ul> -->
 
-               
+
             </div>
          </section>
       </section>
@@ -96,23 +98,36 @@
 
 
       <!-- LOGIN PAGE -->
-      <section ng-show="main.showLoginForm">
-         <h3>Log In</h3>
-         <!-- {{main.userName}} -->
-         <form ng-submit='main.logIn()'>
-            <input  ng-model ="main.userName" placeholder="username"><br>
-            <input  ng-model ="main.password"  type='password' placeholder="password"><br>
-            <input  type='submit' ng-click ="main.showLoginForm = !main.showLoginForm" name="login" value="Log in">
-         </form>
+      <section ng-show="main.showLoginForm" >
+        <div ng-controller="UserController as userCtrl" >
 
-         <li>  <a href="#" ng-click="main.showRegisterForm = !main.showRegisterForm">Register</a></li>
-         <div ng-show="main.showRegisterForm">
-            <form ng-submit='main.addUser()'>
-               <input  ng-model ="main.userName" placeholder="user name"><br>
-               <input  ng-model ="main.password" type='password'placeholder="password"><br>
-               <input type='submit' ng-click ="main.showRegisterForm = !main.showRegisterForm"name="register" value='Register'>
+          <!-- {{main.userName}} -->
+          <div ng-show='userCtrl.showLoginForm'>
+            <h3>Log In</h3>
+            <form ng-submit='userCtrl.logIn()'>
+              <input  ng-model ="userCtrl.userName" placeholder="username"><br>
+              <input  ng-model ="userCtrl.password"  type='password' placeholder="password"><br>
+              <input  type='submit' ng-click ="userCtrl.showLoginForm = !userCtrl.showLoginForm " name="login" value="Log in">
             </form>
-         </div>
+          </div>
+          <li ng-show="userCtrl.showLoginForm ">
+            <!-- <a href="#" ng-click="(userCtrl.showRegisterForm = !userCtrl.showRegisterForm)  (userCtrl.showLoginForm = !userCtrl.showLoginForm)">Register</a>  -->
+            <a href="#" ng-click="userCtrl.resetLoginForm()">Register</a>
+          </li>
+          <div ng-show="userCtrl.showRegisterForm">
+            <form ng-submit='userCtrl.addUser()'>
+              <input  ng-model ="userCtrl.registerUserName" placeholder="user name"><br>
+              <input  ng-model ="userCtrl.registerPassword" type='password'placeholder="password"><br>
+              <!-- <input type='submit' ng-click ="(userCtrl.showRegisterForm = !userCtrl.showRegisterForm) (userCtrl.showLoginForm = !userCtrl.showLoginForm)"name="register" value='Register'> -->
+              <input type='submit' ng-click ="userCtrl.resetRegisterForm()"name="register" value='Register'>
+
+            </form>
+          </div>
+          <div ng-show='userCtrl.showGreeting'>
+            Welcome {{userCtrl.userName}}
+            <button ng-click='userCtrl.logout()'type="button" name="button">Log out</button>
+          </div>
+        </div>
       </section>
 
 
@@ -131,5 +146,3 @@
       </footer>
    </section>
 </div>
-</body>
-</html>

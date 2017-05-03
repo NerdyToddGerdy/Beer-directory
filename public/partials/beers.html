@@ -36,8 +36,7 @@
       IBU: {{beerCtrl.selectedBeer.ibu}}<br>
       {{beerCtrl.selectedBeer.description}}
 
-      <!-- TODO: Add click to button -->
-      <button ng-click="">Add To Favorites</button>
+      <button ng-show="displayCtrl.showAddFavButton" ng-click="beerCtrl.saveFavoriteBeer()">Add To Favorites</button>
       <button ng-click="displayCtrl.backToSearchForm()">Back To Search</button>
     </div>
   </div>
