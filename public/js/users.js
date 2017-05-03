@@ -48,7 +48,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
         // copy loggedin user's info
         for(var i in response.data.currentuser) currentUser[i]=response.data.currentuser[i];
         console.log("Global currentUser", currentUser);
-        controller.userName = currentUser.username
+        controller.userName = currentUser.username;
         $cookies.put('logInSuccess', true);
         $cookies.put("username", response.data.currentuser.username);// set cookies username
         $cookies.put("showGreeting", true);
@@ -93,10 +93,6 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     $window.location.reload();
   }// end of logout
 
-
-  this.getCurrentUserInfo = function (userId){
-    
-  }
   this.resetRegisterForm = function (){
     controller.showRegisterForm = !controller.showRegisterForm;
     controller.showLoginForm = !controller.showLoginForm;
