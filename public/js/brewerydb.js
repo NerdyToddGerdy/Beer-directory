@@ -53,22 +53,35 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
   }
 
   // get a brewery by its name
-  this.getBreweryByName = function(name) {
+  this.getBreweryByName = function(name, breweryCtrl, main) {
     var urlStr = 'breweries/proxy/v2/breweries?name=' + name;
-
+    var breweryCont = breweryCtrl;
+    var mainCont = main;
     $http({
       method: 'GET',
       url: urlStr
     }).then( function(response) {
-      controller.breweries = response.data.data[0];
-      console.log(controller.breweries);
+      controller.breweries2 = response.data.data[0];
+      // console.log('response', response);
+      // console.log('<><><><><><><><><><><><><><><><><><><>');
+      console.log(controller.breweries2);
       // start of test
       $http({
          method: 'GET',
-         url: 'breweries/proxy/v2/brewery/' + controller.breweries.id
+         url: 'breweries/proxy/v2/brewery/' + controller.breweries2.id + '/locations'
       }).then(function(newResponse){
-         controller.thisBrewery = newResponse.breweryId;
-         console.log(controller.thisBrewery, 'thisBrewery');
+         controller.thisBreweryData = newResponse.data.data[0];
+         controller.getBreweriesByZip(controller.thisBreweryData.postalCode);
+         console.log('this streetAddress', controller.thisBreweryData.streetAddress,'{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}', controller.breweries);
+
+         if(controller.thisBreweryData.streetAddress == controller.breweries){
+            console.log('they are the same');
+         }
+         console.log(controller.thisBreweryData, 'thisBrewery');
+         console.log(controller.thisBreweryData.postalCode);
+         console.log(controller.thisBreweryData.streetAddress);
+         console.log(breweryCont);
+         console.log(main);
       });
       // end of test
     }, function(response) {
