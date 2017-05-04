@@ -9,7 +9,7 @@ router.use('/proxy', proxy('api.brewerydb.com' ,{
   proxyReqPathResolver: function(req) {
     var newUrl = require('url').parse(req.url).path;
     var connector = newUrl.includes("?") ? "&" : "?";
-    return newUrl + connector + "key=cbf87c44338b3c02f584632bf9a5cf01"
+    return newUrl + connector + "key=bf995ee00ff129ece7d917c8e5cadb85"
   }
 }))
 

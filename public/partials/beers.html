@@ -1,6 +1,6 @@
 
 
-<div ng-controller="BeerDBController as beerCtrl">
+<div>
 
   <!-- beer page -->
   <div ng-controller="BeerDisplayController as displayCtrl">
@@ -24,6 +24,7 @@
       <ul>
         <li ng-repeat="beer in beerCtrl.beers">
           <p ng-click="displayCtrl.showDetails(beerCtrl, beer)">{{beer.name}}</p>
+
         </li>
       </ul>
     </div>
@@ -31,7 +32,7 @@
     <!-- beer details form -->
     <div ng-show="displayCtrl.showDetailsForm">
       <h3>{{beerCtrl.selectedBeer.name}} - {{beerCtrl.selectedBeer.style}}</h3>
-      Brewery: {{beerCtrl.selectedBeer.brewery}}<br>
+      <h4 ng-click="beerCtrl.beers = [];breweryCtrl.getBreweryByName(beerCtrl.selectedBeer.brewery, breweryCtrl, main)">  Brewery: {{beerCtrl.selectedBeer.brewery}}</h4><br>
       ABV: {{beerCtrl.selectedBeer.abv}}<br>
       IBU: {{beerCtrl.selectedBeer.ibu}}<br>
       {{beerCtrl.selectedBeer.description}}

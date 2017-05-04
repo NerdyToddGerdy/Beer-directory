@@ -7,6 +7,7 @@ body {
   body h3 {
     margin: 0; }
   body header {
+    z-index: 10;
     text-align: center;
     background: #a57621;
     width: 100%;
@@ -60,22 +61,47 @@ body {
     height: 10%; }
   body .breweryShowSection {
     border: 2px black solid;
-    width: 66%;
+    width: 910px;
     border-radius: 5px;
     padding: 1%;
     height: 65%;
     background: #b8a270;
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
     flex-wrap: wrap;
     align-content: space-around; }
     body .breweryShowSection img {
       border-radius: 1%;
-      box-shadow: 9px 6px #494333; }
+      box-shadow: 9px 6px #494333;
+      width: 288px;
+      height: 288px; }
+    body .breweryShowSection h3 {
+      margin: 7px 0; }
+    body .breweryShowSection .brewery-stats {
+      width: 35%; }
   body .spacing {
     height: 10vh;
     width: 1px; }
   body .spacing-head {
     height: 11em; }
+  body .brewerys-beer-list {
+    width: 910px; }
+  body #map-container {
+    width: 910px;
+    height: auto; }
+  body #map_panel {
+    width: 50%;
+    height: 500px;
+    float: left; }
+  body #directions_panel {
+    width: 45%;
+    float: right;
+    overflow: scroll;
+    background: #b8a270;
+    height: 500px; }
+  body .this-brewery-beers {
+    overflow: scroll;
+    height: 288px;
+    width: 212px; }
 
 /*# sourceMappingURL=main.css.map */

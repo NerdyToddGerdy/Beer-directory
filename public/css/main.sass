@@ -12,6 +12,7 @@ body
    h3
       margin: 0
    header
+      z-index: 10
       text-align: center
       background: $secondary-color
       width: 100%
@@ -72,21 +73,45 @@ body
       height: 10%
    .breweryShowSection
       border: 2px black solid
-      width: 66%
+      width: 910px
       border-radius: 5px
       padding: 1%
       height: 65%
       background: #b8a270
       display: flex
-      flex-direction: column
+      justify-content: space-around
       flex-wrap: wrap
       align-content: space-around
       img
          border-radius: 1%
          box-shadow: 9px 6px #494333
-
+         width: 288px
+         height: 288px
+      h3
+         margin: 7px 0
+      .brewery-stats
+         width: 35%
    .spacing
       height: 10vh
       width: 1px
    .spacing-head
       height: 11em
+   .brewerys-beer-list
+      width: 910px
+   #map-container
+      width: 910px
+      height: auto
+   #map_panel
+      width: 50%
+      height: 500px
+      float: left
+   #directions_panel
+      width: 45%
+      float: right
+      overflow: scroll
+      background: #b8a270
+      height: 500px
+   .this-brewery-beers
+      overflow: scroll
+      height: 288px
+      width: 212px

@@ -7,6 +7,8 @@ app.controller('MainController', ['$http', function($http){
    this.showBeerPage = false;
    this.isAdmin =false;
    this.currentBrewery = false;
+   this.controller = this;
+   this.turnOnMap = false;
    this.getBreweries = function(brew){
       console.log(brew);
       $http({
@@ -16,8 +18,6 @@ app.controller('MainController', ['$http', function($http){
          console.log(response);
       });
    };
-
-
    this.openHomePage = function(){
       this.showHomePage = true;
       this.showBrewerySearch = false;
@@ -25,8 +25,11 @@ app.controller('MainController', ['$http', function($http){
       this.showBeerPage = false;
       this.showBreweryPage = false;
       this.showBreweries = false;
+      this.turnOnMap = false;
+
    };
    this.openBrewerySearch = function(){
+      this.turnOnMap = false;
       this.showBrewerySearch = true;
       this.showLoginForm = false;
       this.showHomePage = false;
@@ -37,6 +40,7 @@ app.controller('MainController', ['$http', function($http){
    };
    this.openBeerSearch = function(){
       this.showHomePage = false;
+      this.turnOnMap = false;
       this.showBrewerySearch = false;
       this.showLoginForm = false;
       this.showBeerPage = true;
@@ -51,15 +55,31 @@ app.controller('MainController', ['$http', function($http){
       this.showBeerPage = false;
       this.showBreweryPage = false;
       this.showBreweries = false;
+      this.turnOnMap = false;
    };
-   this.openThisBrewery = function(results, breweryCtrl){
-      // console.log(breweryCtrl);
-      // console.log(results.brewery);
-      this.showBrewerySearch = false;
-      this.showBreweryPage = true;
-      breweryCtrl.currentBrewery1 = results;
-      console.log(breweryCtrl.currentBrewery1);
 
-      //enlarge selected brewery and add data
+   this.openThisBrewery = function(results, breweryCtrl){
+      this.showHomePage = false;
+      this.showBrewerySearch = false;
+      this.showLoginForm = false;
+      this.showBeerPage = false;
+      this.showBreweryPage = true;
+      this.showBreweries = true;
+      breweryCtrl.currentBrewery1 = results;
+      // this.turnOnMap = false;
+   };
+
+   this.fromBeerToBrewery = function(name) {
+     var urlStr = 'breweries/proxy/v2/breweries?name=' + name;
+     var controller = this;
+     $http({
+      method: 'GET',
+      url: urlStr
+     }).then( function(response) {
+      controller.brewery = response.data.data[0].name;
+      console.log(controller.breweries);
+     }, function(response) {
+      console.log("fromBeerToBrewery failed:", response);
+     });
    };
 }]);

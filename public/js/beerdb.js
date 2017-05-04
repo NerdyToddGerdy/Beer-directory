@@ -18,6 +18,21 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
     this.foundNoBeers = false;
   }
 
+  this.capWords = function(breweryName) {
+    if (breweryName === "") {
+      return breweryName;
+    }
+
+    var words = breweryName.split(" ");
+    for (var i = 0; i < words.length; i++) {
+      var curWord = words[i];
+      var firstLetter = curWord.charAt(0).toUpperCase();
+      curWord = firstLetter + curWord.slice(1);
+      words[i] = curWord;
+    }
+    return words.join(" ");
+  }
+
   // Takes the results of a search and puts the data into objects that match
   // the mongo model. Adds the beers to the beer list.
   this.addFoundBeersToList = function(data) {
@@ -27,7 +42,8 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
         description: data[i].description,
         style: data[i].style.shortName,
         abv: data[i].abv,
-        ibu: data[i].ibu
+        ibu: data[i].ibu,
+        brewery: this.capWords( this.searchByBrewery)
       }
       controller.beers.push(newBeer);
     }
@@ -37,6 +53,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
   // Search by name has priority over search by brewery
   this.findBeer = function() {
     if (this.searchForBeer !== "") {
+      this.searchByBrewery = ""
       this.getBeerByName();
     } else if (this.searchByBrewery !== "") {
       this.getBeersByBrewery();
@@ -64,12 +81,41 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
 
       controller.addFoundBeersToList(response.data.data);
       controller.getBreweryByBeerID(response.data.data[0].id);
+      console.log(controller.beers);
     }, function(response) {
       console.log("Get beer by name failed", response);
       controller.beers = [];
     }
   )};
 
+  this.goToThisBeer = function(breweryId, main){
+      main.showBrewerySearch = false;
+      main.showLoginForm = false;
+      main.showHomePage = false;
+      main.showBeerPage = false;
+      main.showBreweryPage = false;
+      main.showBreweries = false;
+      BeerDisplayController.showDetailsForm = true;
+   //   this.getBeerByName(breweryId);
+   var urlStr = '/breweries/proxy/v2/beers?name=' + controller.searchForBeer;
+
+   $http({
+     method: 'GET',
+     url: urlStr
+   }).then( function(response) {
+     controller.beers = [];
+     // check if beer was found
+     if (response.data.hasOwnProperty('data')) {
+       controller.foundNoBeers = false;
+       this.thisOneBeer = response;
+       console.log(response);
+     }
+     else {
+       controller.foundNoBeers = true;
+       return;
+     }
+  });
+ };
 
   // Get the brewery that makes the beer using the brewerydb beer id
   this.getBreweryByBeerID = function(beerID) {
@@ -83,7 +129,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
         controller.beers[0].brewery = response.data.data[0].name;
       }
     }, function(response) {
-      console.log("getBreweryByBeerID failed:", resonse);
+      console.log("getBreweryByBeerID failed:", response);
     }
   )};
 
@@ -138,6 +184,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
     }, function(response) {
       console.log("saveFavoriteBeer failed: ", response);
     })
+    window.location.reload();  // An Nguyen added to reload the page
   }
 
 }]);

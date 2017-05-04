@@ -1,11 +1,12 @@
-angular.module('BreweryApp').controller('BreweryDBController', ['$http', function($http) {
 
+angular.module('BreweryApp').controller('BreweryDBController', ['$http', function($http) {
 
   var controller = this;
   this.breweries = [];
 
   // Get a list of breweries in a zip code
-  this.getBreweriesByZip = function(zipCode) {
+  this.getBreweriesByZip = function(zipCode, callback) {
+    console.log("breweries by zip called");
     var urlStr = '/breweries/proxy/v2/locations?postalCode=' + zipCode;
     $http({
       method: 'GET',
@@ -15,6 +16,10 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
       }
     }).then( function(response) {
       controller.breweries = response.data.data;
+      console.log("getBreweriesByZip", controller.breweries);
+      if (callback != undefined){
+        callback();
+      }
     }, function(response) {
       console.log("Get by zip code failed", response);
       this.breweries = [];
@@ -56,21 +61,42 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
   }
 
   // get a brewery by its name
-  this.getBreweryByName = function(name) {
+  this.getBreweryByName = function(name, breweryCtrl, main) {
     var urlStr = 'breweries/proxy/v2/breweries?name=' + name;
-
+    var breweryCont = breweryCtrl;
+    var mainCont = main;
     $http({
       method: 'GET',
       url: urlStr
     }).then( function(response) {
-      controller.breweries = response.data;
+      controller.breweries2 = response.data.data[0];
+      $http({
+        method: 'GET',
+        url: 'breweries/proxy/v2/brewery/' + controller.breweries2.id + '/locations'
+      }).then(function(newResponse){
+        controller.thisBreweryData = newResponse.data.data[0];
+
+        controller.getBreweriesByZip(controller.thisBreweryData.postalCode, function() {
+
+          for (var i = 0; i < controller.breweries.length; i++) {
+            if(controller.thisBreweryData.streetAddress === controller.breweries[i].streetAddress){
+              console.log(controller.breweries[i]);
+              console.log('they are the same');
+              controller.currentBrewery1 = controller.breweries[i];
+              console.log(controller.currentBrewery1);
+              main.openThisBrewery(controller.breweries[i], breweryCtrl, main);
+              controller.breweries = []
+              break;
+            }
+          }
+        });
+
+      });
     }, function(response) {
       console.log("getBreweryByName failed:", response);
-    });
+    })
   };
 
-  //Display brewery's address on google map
-  ///http://stackoverflow.com/questions/15925980/using-address-instead-of-longitude-and-latitude-with-google-maps-api
   // this.displayAddress = function(brewery){
   //   console.log(brewery.address);
   //   this.initialize(brewery.address);
@@ -122,4 +148,20 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
   // }
 
 
+  // An Nguyen Added : for google map display service
+  this.showDirectionOption = false;
+  this.startPoint = "";
+  this.getBreweryLocation = function(addressObj){
+    this.turnOnMap = true;
+    this.showDirectionOption = true;
+    this.destination = addressObj.streetAddress + " " + addressObj.region + " " + addressObj.postalCode;
+  }
+  this.setCurrentUserDirection = function(){
+    //set global current user address
+    currentUserDirection.start = this.startPoint;
+    currentUserDirection.end = this.destination;
+    this.showDirectionOption = false;
+    // drivingMap (this.startPoint, this.destination)
+  }
+  // End map service
 }]);

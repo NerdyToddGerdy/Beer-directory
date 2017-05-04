@@ -9,119 +9,161 @@
   <script src="js/global.js" charset="utf-8"></script>
   <script src="js/app.js" charset="utf-8"></script>
   <script src="js/users.js" charset="utf-8"></script>
+  <script src="js/map.js" charset="utf-8"></script>
   <script src="js/brewerydb.js" charset="utf-8"></script>
   <script src="js/beerdb.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <link href="https://fonts.googleapis.com/css?family=Diplomata+SC|Fascinate+Inline|Fredericka+the+Great|Sirin+Stencil|Vast+Shadow" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="/css/animate.css">
   <link rel="stylesheet" href="/css/testAnimate.css">
 </head>
 
+
 <body ng-controller="MainController as main" >
-  <header>
-    <h1>Brews Near You</h1>
-    <nav>
-      <ul>
-        <li ng-click="main.openHomePage()">home</li>
-        <li ng-click="main.openBrewerySearch()">breweries</li>
-        <li ng-click="main.openBeerSearch()">beers</li>
-        <li ng-click="main.openLoginPage()">log in</li>
-      </ul>
-    </nav>
-  </header>
 
-  <div class="spacing-head">
+  <div ng-controller="BreweryDBController as breweryCtrl">
+    <div ng-controller="BeerDBController as beerCtrl">
+      <header>
+        <h1>Brews Near You</h1>
+        <nav>
+          <ul>
+            <li ng-click="main.openHomePage()">home</li>
+            <li ng-click="main.openBrewerySearch()">breweries</li>
+            <li ng-click="beerCtrl.beers = [];main.openBeerSearch()">beers</li>
+            <li ng-click="main.openLoginPage()">log in/profile</li>
+          </ul>
+        </nav>
+      </header>
 
-  </div>
-  <!-- HOME PAGE -->
-  <section ng-show="main.showHomePage">
-    <h3>Welcome to the Home Page</h3>
-    <h2 ng-click="main.openBrewerySearch()">Find A Brewery</h2>
-    <img ng-click="main.openBrewerySearch()" src="http://calgarybuzz.com/wp-content/uploads/2016/01/shutterstock_brewery-984x500.jpg" alt="">
-    <h2 ng-click="main.openBeerSearch()">Find A Beer</h2>
-    <img ng-click="main.openBeerSearch()" src="http://fullthrottlebottles.com/images/beer-bottles.jpg" alt="">
-    <h2 ng-click="main.openLoginPage()">Login</h2>
-  </section>
+      <div class="spacing-head">
 
-  <!-- BREWERIES SEARCH-->
-  <section ng-show="main.showBreweries" class="brewery-search" ng-controller="BreweryDBController as breweryCtrl">
-    <div class=""  ng-show="main.showBrewerySearch">
-      <div class="Search Menu">
-        <h3>Search For A Brewery</h3>
-        <form ng-submit=breweryCtrl.getBreweriesByZip(zipCode)>
-          <input type="text" ng-model="zipCode" placeholder="Search by zip code">
-          <input type="submit" name="" value="Search">
-        </form>
       </div>
-      <ul>
-        <li class="items" ng-repeat="results in breweryCtrl.breweries">
-          <h3 ng-click="main.openThisBrewery(results, breweryCtrl)">{{results.brewery.name}}<br></h3>
-          <img ng-click="main.openThisBrewery(results, breweryCtrl)" ng-src="{{results.brewery.images.squareMedium}}" alt="{{results.brewery.name}}"/>
-          <h4>{{results.streetAddress}}</h4>
-          <h4>{{results.locality}}, {{results.region}} {{results.postalCode}}</h4>
-        </li>
-      </ul>
-    </div>
-    <!-- BREWERIES SHOW PAGE -->
-    <section class="breweryShowSection" ng-show="main.showBreweryPage">
-      <img ng-src="{{breweryCtrl.currentBrewery1.brewery.images.squareLarge}}" alt="">
-      <h3>{{breweryCtrl.currentBrewery1.brewery.name}}</h3>
-      <h3>{{breweryCtrl.currentBrewery1.streetAddress}}</h3>
-      <h3>{{breweryCtrl.currentBrewery1.locality}}, {{breweryCtrl.currentBrewery1.region}} {{breweryCtrl.currentBrewery1.postalCode}}</h3>
-      <h3>{{breweryCtrl.currentBrewery1.brewery.desription}}</h3>
-      <h3><a href="{{breweryCtrl.currentBrewery1.website}}">{{breweryCtrl.currentBrewery1.website}}</a></h3>
-      <h3>Phone Number: {{breweryCtrl.currentBrewery1.phone}}</h3>
-      <button ng-click="main.openBrewerySearch()">Back to Breweries</button>
+      <!-- HOME PAGE -->
+      <section ng-show="main.showHomePage">
+        <ng-include src="'./partials/homePage.html'"></ng-include>
+      </section>
+
+      <!-- BREWERIES SEARCH-->
+      <section ng-show="main.showBreweries" class="brewery-search" >
+        <div class=""  ng-show="main.showBrewerySearch">
+          <div class="Search Menu">
+            <h3>Search For A Brewery</h3>
+            <form ng-submit=breweryCtrl.getBreweriesByZip(zipCode)>
+              <input type="text" ng-model="zipCode" placeholder="Search by zip code">
+              <input type="submit" name="" value="Search">
+            </form>
+          </div>
+          <ul>
+            <li class="items" ng-repeat="results in breweryCtrl.breweries">
+              <h3 ng-click="main.openThisBrewery(results, breweryCtrl)">{{results.brewery.name}}<br></h3>
+              <img ng-click="main.openThisBrewery(results, breweryCtrl)" ng-src="{{results.brewery.images.squareMedium}}" alt="{{results.brewery.name}}"/>
+              <h4>{{results.streetAddress}}</h4>
+              <h4>{{results.locality}}, {{results.region}} {{results.postalCode}}</h4>
+            </li>
+          </ul>
+        </div>
+        <!-- BREWERIES SHOW PAGE -->
+        <section class="breweryShowSection" ng-show="main.showBreweryPage">
+          <img ng-src="{{breweryCtrl.currentBrewery1.brewery.images.squareLarge}}" alt="">
+          <div class="brewery-stats">
+            <h3>{{breweryCtrl.currentBrewery1.brewery.name}}</h3>
+            <h3>{{breweryCtrl.currentBrewery1.streetAddress}}</h3>
+            <h3>{{breweryCtrl.currentBrewery1.locality}}, {{breweryCtrl.currentBrewery1.region}} {{breweryCtrl.currentBrewery1.postalCode}}</h3>
+            <h3>{{breweryCtrl.currentBrewery1.brewery.desription}}</h3>
+            <h3><a href="{{breweryCtrl.currentBrewery1.website}}">{{breweryCtrl.currentBrewery1.website}}</a></h3>
+            <h3>Phone Number: {{breweryCtrl.currentBrewery1.phone}}</h3>
+            <!-- NEED TO ADD A CONTROLLER -->
+            <button ng-click="">Add To Favorites</button>
+            <button ng-click="main.openBrewerySearch()">Back to Breweries</button><br>
+            <button ng-click="beerCtrl.beers=[]; beerCtrl.getBreweryBeers(breweryCtrl.currentBrewery1.breweryId, main)">Show beers</button>
+            <button ng-click="breweryCtrl.getBreweryLocation(breweryCtrl.currentBrewery1)">Show Direction</button>
+          </div>
+
+          <!-- Show BEERS ON PAGE -->
+          <!-- <div > -->
+          <!-- </div> -->
+          <div ng-show="main.showBreweryPage" class="this-brewery-beers">
+             <ul ng-repeat="beer in beerCtrl.beers">
+                <!-- <li ng-click="goToThisBeer({{breweryCtrl.currentBrewery1.breweryId}}, main)">{{beer.name}}</li> -->
+                <li>{{beer.name}}</li>
+             </ul>
+          </div>
+        </section>
+        <!-- show direction option : An Nguyen Added-->
+        <section class="breweryShowSection" ng-show="breweryCtrl.showDirectionOption" ng-controller="BreweryMap as map">
+          Start:<input type="text" placeholder="type your address" ng-model="breweryCtrl.startPoint">
+          End:<input ng-show="breweryCtrl.showDirectionOption"type="text" ng-model="breweryCtrl.destination">
+          <input ng-show="breweryCtrl.showDirectionOption"type="submit" value="submit" ng-click="breweryCtrl.setCurrentUserDirection() ; map.submit(); main.turnOnMap = true">
+        </section>
+        <!-- End show map option  -->
+        <!-- Display map: An Nguyen Added-->
+        <!-- <section>
+          <div  class='row' id='map-container'>
+            <div id="map_panel" ></div>
+            <div id="directions_panel"></div>
+          </div>
+
+      </section> -->
     </section>
+
+    <!-- BEER PAGE -->
+    <section ng-show="main.showBeerPage">
+      <ng-include src="'./partials/beers.html'"></ng-include>
+    </section>
+
+    <!-- LOGIN PAGE -->
+    <section ng-show="main.showLoginForm" >
+      <div ng-controller="UserController as userCtrl" >
+        <div ng-show ="1">
+          <div ng-show='userCtrl.showLoginForm'>
+            <h3>Log In</h3>
+            <form ng-submit='userCtrl.logIn()'>
+              <input  ng-model ="userCtrl.userName" placeholder="username"><br>
+              <input  ng-model ="userCtrl.password"  type='password' placeholder="password"><br>
+              <input  type='submit' ng-click ="userCtrl.showLoginForm = !userCtrl.showLoginForm " name="login" value="Log in">
+            </form>
+          </div>
+          <li ng-show="userCtrl.showLoginForm ">
+            <a href="#" ng-click="userCtrl.resetLoginForm()">Register</a>
+          </li>
+          <div ng-show="userCtrl.showRegisterForm">
+            <form ng-submit='userCtrl.addUser()'>
+              <input  ng-model ="userCtrl.registerUserName" placeholder="user name"><br>
+              <input  ng-model ="userCtrl.registerPassword" type='password'placeholder="password"><br>
+              <input type='submit' ng-click ="userCtrl.resetRegisterForm()"name="register" value='Register'>
+            </form>
+          </div>
+        </div>
+        <div ng-show='userCtrl.showGreeting'>
+          <ng-include src="'./partials/profile.html'"></ng-include>
+        </div>
+      </div>
+    </section>
+
+    <!-- map section -->
+    <section ng-show='main.turnOnMap'>
+      <div  class='row' id='map-container'>
+        <div id="map_panel" ></div>
+        <div id="directions_panel"></div>
+      </div>
+    </section>
+
   </section>
+  <div class="spacing">
 
-  <!-- BEER PAGE -->
-  <section ng-show="main.showBeerPage">
-    <ng-include src="'./partials/beers.html'"></ng-include>
-  </section>
-<!-- LOGIN PAGE -->
-<!-- <section ng-show="main.showLoginForm" > -->
-<section ng-show="main.showLoginForm" >
-  <div ng-controller="UserController as userCtrl" >
-
-    <!-- {{main.userName}} -->
-    <div ng-show='userCtrl.showLoginForm'>
-      <h3>Log In</h3>
-      <form ng-submit='userCtrl.logIn()'>
-        <input  ng-model ="userCtrl.userName" placeholder="username"><br>
-        <input  ng-model ="userCtrl.password"  type='password' placeholder="password"><br>
-        <input  type='submit' ng-click ="userCtrl.showLoginForm = !userCtrl.showLoginForm " name="login" value="Log in">
-      </form>
-    </div>
-    <li ng-show="userCtrl.showLoginForm ">
-      <!-- <a href="#" ng-click="(userCtrl.showRegisterForm = !userCtrl.showRegisterForm)  (userCtrl.showLoginForm = !userCtrl.showLoginForm)">Register</a>  -->
-      <a href="#" ng-click="userCtrl.resetLoginForm()">Register</a>
-    </li>
-    <div ng-show="userCtrl.showRegisterForm">
-      <form ng-submit='userCtrl.addUser()'>
-        <input  ng-model ="userCtrl.registerUserName" placeholder="user name"><br>
-        <input  ng-model ="userCtrl.registerPassword" type='password'placeholder="password"><br>
-        <!-- <input type='submit' ng-click ="(userCtrl.showRegisterForm = !userCtrl.showRegisterForm) (userCtrl.showLoginForm = !userCtrl.showLoginForm)"name="register" value='Register'> -->
-        <input type='submit' ng-click ="userCtrl.resetRegisterForm()"name="register" value='Register'>
-
-      </form>
-    </div>
-    <div ng-show='userCtrl.showGreeting'>
-      Welcome {{userCtrl.userName}}
-      <button ng-click='userCtrl.logout()'type="button" name="button">Log out</button>
-    </div>
   </div>
-</section>
 
-<!-- PROFILE -->
-<section>
+  <section class="footer">
+    <footer>
+      <!-- NEED TO STATE THAT WE ARE USING THE API -->
+      <a href="https://www.breweryDB.com"><img src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png" alt=""></a>
+    </footer>
+  </section>
+
+</div>
+</div>
 
 
-<section class="footer">
-  <footer>
-    <!-- NEED TO STATE THAT WE ARE USING THE API -->
-    <a href="https://www.breweryDB.com"><img src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png" alt=""></a>
-  </footer>
-</section>
 </body>
 </html>
