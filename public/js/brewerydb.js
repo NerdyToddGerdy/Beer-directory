@@ -5,7 +5,8 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
   this.breweries = [];
 
   // Get a list of breweries in a zip code
-  this.getBreweriesByZip = function(zipCode) {
+  this.getBreweriesByZip = function(zipCode, callback) {
+    console.log("breweries by zip called");
     var urlStr = '/breweries/proxy/v2/locations?postalCode=' + zipCode;
     $http({
       method: 'GET',
@@ -15,7 +16,10 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
       }
     }).then( function(response) {
       controller.breweries = response.data.data;
-      console.log(controller.breweries , "returning all breweries in postal code");
+      console.log("getBreweriesByZip", controller.breweries);
+      if (callback != undefined){
+        callback();
+      }
     }, function(response) {
       console.log("Get by zip code failed", response);
       this.breweries = [];
@@ -66,44 +70,33 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
       url: urlStr
     }).then( function(response) {
       controller.breweries2 = response.data.data[0];
-      // console.log('response', response);
-      // console.log('<><><><><><><><><><><><><><><><><><><>');
-      console.log(controller.breweries2);
-      // start of test
       $http({
-         method: 'GET',
-         url: 'breweries/proxy/v2/brewery/' + controller.breweries2.id + '/locations'
+        method: 'GET',
+        url: 'breweries/proxy/v2/brewery/' + controller.breweries2.id + '/locations'
       }).then(function(newResponse){
-         controller.thisBreweryData = newResponse.data.data[0];
-         controller.getBreweriesByZip(controller.thisBreweryData.postalCode);  ////searching by zipcode
-         console.log('this streetAddress', controller.thisBreweryData.streetAddress,'{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}', controller.breweries);
+        controller.thisBreweryData = newResponse.data.data[0];
 
-         for (var i = 0; i < controller.breweries.length; i++) {
-            if(controller.thisBreweryData.streetAddress == controller.breweries[i].streetAddress){
-               console.log(controller.breweries[i]);
-               console.log('they are the same');
-               controller.currentBrewery1 = controller.breweries[i];
-               console.log(controller.currentBrewery1);
-               main.openThisBrewery(controller.breweries[i], breweryCtrl);
-               break;
-            } else{
-               // console.log('no match');
+        controller.getBreweriesByZip(controller.thisBreweryData.postalCode, function() {
+
+          for (var i = 0; i < controller.breweries.length; i++) {
+            if(controller.thisBreweryData.streetAddress === controller.breweries[i].streetAddress){
+              console.log(controller.breweries[i]);
+              console.log('they are the same');
+              controller.currentBrewery1 = controller.breweries[i];
+              console.log(controller.currentBrewery1);
+              main.openThisBrewery(controller.breweries[i], breweryCtrl, main);
+              controller.breweries = []
+              break;
             }
-         }
-         // console.log(controller.thisBreweryData, 'thisBrewery');
-         // console.log(controller.thisBreweryData.postalCode);
-         // console.log(controller.thisBreweryData.streetAddress);
-         // console.log(breweryCont);
-         // console.log(main);
+          }
+        });
+
       });
-      // end of test
     }, function(response) {
       console.log("getBreweryByName failed:", response);
-    });
+    })
   };
 
-  // Display brewery's address on google map
-  // /http://stackoverflow.com/questions/15925980/using-address-instead-of-longitude-and-latitude-with-google-maps-api
   this.displayAddress = function(brewery){
     console.log(brewery.address);
     this.initialize(brewery.address);
@@ -155,4 +148,19 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
   }
 
 
+  // An Nguyen Added : for google map display service
+  this.showDirectionOption = false;
+  this.startPoint = "";
+  this.getBreweryLocation = function(addressObj){
+    this.showDirectionOption = true;
+    this.destination = addressObj.streetAddress + " " + addressObj.region + " " + addressObj.postalCode;
+  }
+  this.setCurrentUserDirection = function(){
+    //set global current user address
+    currentUserDirection.start = this.startPoint;
+    currentUserDirection.end = this.destination;
+    this.showDirectionOption = false;
+    // drivingMap (this.startPoint, this.destination)
+  }
+  // End map service
 }]);

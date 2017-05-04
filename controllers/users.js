@@ -37,10 +37,26 @@ router.put('/breweries/:id', function(req, res){
     if(updatedUser){
       updateUser.breweries.push(req.body.breweries);
       updateUser.save();
+      currentUser = updatedUser;
       res.json(updatedUser);
     }
     else {
       res.json('failed to update');
+    }
+  });
+});
+//====================================================
+//update beers record
+router.put('/beers/update/:id', function(req, res){
+  Users.findById(req.params.id, function(err, updatedUser){
+    if(updatedUser){
+      updatedUser.beers = [];
+      updatedUser.beers = req.body.beers;
+      updatedUser.save();
+      res.json(updatedUser);
+    }
+    else {
+      res.json('failed to update')
     }
   });
 });

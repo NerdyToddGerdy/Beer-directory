@@ -167,6 +167,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
     }, function(response) {
       console.log("saveFavoriteBeer failed: ", response);
     })
+    window.location.reload();  // An Nguyen added to reload the page
   }
 
 }]);
