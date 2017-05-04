@@ -1,13 +1,18 @@
 
   <div >
     <ul>
-    <li ng-repeat="beer in userCtrl.currentUser.beers">
+    <li ng-repeat="beer in userCtrl.currentUser.beers track by $index">
       <ul>
         <li>Name: {{beer.name}}</li>
         <li>Description: {{beer.description}}</li>
+        <li>Comment: {{beer.comment}}</li>
       </ul>
       <button ng-click='userCtrl.removeBeer(beer.name)'>Delete</button>
-      <button>Comment</button>
+      <button ng-click ="userCtrl.showEdit($index)"> Add comment</button>
+
+
+      <textarea ng-show="userCtrl.editableBeerIndex == $index" cols="80" ng-model ="userCtrl.comment"placeholder="type your comment"></textarea>
+      <button ng-show ="userCtrl.editableBeerIndex == $index" ng-click='userCtrl.saveComment(beer)'>Save</button>
     </ul>
 
 </div>

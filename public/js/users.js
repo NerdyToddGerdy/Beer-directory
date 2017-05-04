@@ -9,6 +9,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
   this.showLoginForm = true;
   this.isAdmin =false;
   this.logInSuccess = false;
+  this.showEdit = false
   this.addUser = function(){
     console.log('add user');
     $http({
@@ -106,8 +107,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
   }
 //------------------------------------------------------
 this.removeBeer = function (removeBeerName){
-  console.log('current user hold beers', currentUser.beers);
-  var urlStr = '/users/beers/remove/' + currentUser._id;
+  var urlStr = '/users/beers/update/' + currentUser._id;
   var _beers = currentUser.beers;
   for (var i = 0; i < _beers. length; i ++){
     if (_beers[i].name === removeBeerName){
@@ -115,16 +115,52 @@ this.removeBeer = function (removeBeerName){
       break;
     }
   }
-  console.log("beers after remove ", _beers);
    $http({
      method: 'PUT',
      url: urlStr,
-     data: {beers:  this.selectedBeer }
+     data: {beers:  _beers }
    }).then(function(response) {
      console.log("beer is removed");
    }, function(response) {
      console.log("failed to delete beer", response);
    })
+}
+//----------------------------------------------------------
+
+this.showEdit = function($index){
+  console.log("this is index", $index);
+ this.editableBeerIndex = $index;
+
+}
+this.saveComment = function (editBeer){
+  //reset controll
+
+this.editableBeerIndex = -1;
+ console.log("edit :", editBeer);
+  var urlStr = '/users/beers/update/' + currentUser._id;
+   var _beers = currentUser.beers;
+   for (var i = 0; i < _beers. length; i ++){
+     if (_beers[i].name === editBeer.name){
+        _beers[i].comment = this.comment
+        console.log("After add comment:  " ,_beers[i]);
+       break;
+     }
+   }
+   currentUser.beers = [];
+   currentUser.beers = _beers;
+console.log(_beers, currentUser);
+$http({
+  method: 'PUT',
+  url: urlStr,
+  data: {beers:  _beers }
+}).then(function(response) {
+  this.editableBeerIndex = null;
+
+  console.log("beer is updated");
+}, function(response) {
+  console.log("failed to delete beer", response);
+});
+this.comment = "";
 }
 
   //------------------------------------------------------

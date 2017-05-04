@@ -47,7 +47,7 @@ router.put('/breweries/:id', function(req, res){
 });
 //====================================================
 //update beers record
-router.put('/beers/remove/:id', function(req, res){
+router.put('/beers/update/:id', function(req, res){
   Users.findById(req.params.id, function(err, updatedUser){
     if(updatedUser){
       updatedUser.beers = [];
@@ -59,14 +59,6 @@ router.put('/beers/remove/:id', function(req, res){
       res.json('failed to update')
     }
   });
-});
-//====================================================
-//update beers record
-router.put('/beers/update/:id', function(req, res){
-  Users.findByIdAndUpdate(req.params.id, req.body, {new:true}, function(err, udpatedEmployee){
-      if(err) {console.log(err);}
-      res.json(udpatedEmployee);
-    });
 });
 //====================================================
 //get record by id
