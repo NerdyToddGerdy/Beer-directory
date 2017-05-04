@@ -54,10 +54,12 @@ app.controller('MainController', ['$http', function($http){
    this.openThisBrewery = function(results, breweryCtrl){
       // console.log(breweryCtrl);
       // console.log(results.brewery);
+      this.showBeerPage = false;
       this.showBrewerySearch = false;
       this.showBreweryPage = true;
+      console.log(this.showBeerPage, this.showBrewerySearch, this.showBreweryPage, this.showBreweries);
       breweryCtrl.currentBrewery1 = results;
-      console.log(breweryCtrl.currentBrewery1);
+      console.log(breweryCtrl.currentBrewery1, 'openThisBrewery');
 
       //enlarge selected brewery and add data
    };

@@ -72,7 +72,8 @@ body {
     body .breweryShowSection img {
       border-radius: 1%;
       box-shadow: 9px 6px #494333;
-      width: 45%; }
+      width: 288px;
+      height: 288px; }
     body .breweryShowSection h3 {
       margin: 7px 0; }
     body .breweryShowSection .brewery-stats {

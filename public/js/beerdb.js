@@ -70,6 +70,34 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
     }
   )};
 
+  this.goToThisBeer = function(breweryId, main){
+      main.showBrewerySearch = false;
+      main.showLoginForm = false;
+      main.showHomePage = false;
+      main.showBeerPage = false;
+      main.showBreweryPage = false;
+      main.showBreweries = false;
+      BeerDisplayController.showDetailsForm = true;
+   //   this.getBeerByName(breweryId);
+   var urlStr = '/breweries/proxy/v2/beers?name=' + controller.searchForBeer;
+
+   $http({
+     method: 'GET',
+     url: urlStr
+   }).then( function(response) {
+     controller.beers = [];
+     // check if beer was found
+     if (response.data.hasOwnProperty('data')) {
+       controller.foundNoBeers = false;
+       this.thisOneBeer = response;
+       console.log(response);
+     }
+     else {
+       controller.foundNoBeers = true;
+       return;
+     }
+  });
+ };
 
   // Get the brewery that makes the beer using the brewerydb beer id
   this.getBreweryByBeerID = function(beerID) {
