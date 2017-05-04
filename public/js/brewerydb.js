@@ -148,4 +148,19 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
   }
 
 
+  // An Nguyen Added : for google map display service
+  this.showDirectionOption = false;
+  this.startPoint = "";
+  this.getBreweryLocation = function(addressObj){
+    this.showDirectionOption = true;
+    this.destination = addressObj.streetAddress + " " + addressObj.region + " " + addressObj.postalCode;
+  }
+  this.setCurrentUserDirection = function(){
+    //set global current user address
+    currentUserDirection.start = this.startPoint;
+    currentUserDirection.end = this.destination;
+    this.showDirectionOption = false;
+    // drivingMap (this.startPoint, this.destination)
+  }
+  // End map service
 }]);
