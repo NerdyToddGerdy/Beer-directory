@@ -18,6 +18,21 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
     this.foundNoBeers = false;
   }
 
+  this.capWords = function(breweryName) {
+    if (breweryName === "") {
+      return breweryName;
+    }
+
+    var words = breweryName.split(" ");
+    for (var i = 0; i < words.length; i++) {
+      var curWord = words[i];
+      var firstLetter = curWord.charAt(0).toUpperCase();
+      curWord = firstLetter + curWord.slice(1);
+      words[i] = curWord;
+    }
+    return words.join(" ");
+  }
+
   // Takes the results of a search and puts the data into objects that match
   // the mongo model. Adds the beers to the beer list.
   this.addFoundBeersToList = function(data) {
@@ -28,7 +43,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
         style: data[i].style.shortName,
         abv: data[i].abv,
         ibu: data[i].ibu,
-        brewery: this.searchByBrewery
+        brewery: this.capWords( this.searchByBrewery)
       }
       controller.beers.push(newBeer);
     }
