@@ -2,8 +2,11 @@ angular.module('BreweryApp').controller('BreweryMap', ['$http', function($http) 
   // This function will take starting address, and ending address to show routes by using google-driving-mode map
   //http://stackoverflow.com/questions/3896871/
   this.submit = function (){
+     turnOnMap = true;
     console.log('starting: ', currentUserDirection.start);
     console.log('ending: ', currentUserDirection.end);
+    console.log(turnOnMap);
+    console.log(turnOnMap);
     drivingMap(currentUserDirection.start, currentUserDirection.end);
     currentUserDirection = {};
   }
