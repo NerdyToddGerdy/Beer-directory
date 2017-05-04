@@ -5,7 +5,11 @@
     <li ng-repeat="beer in userCtrl.currentUser.beers track by $index">
       <ul>
         <li>Name: {{beer.name}}</li>
-        <li>Description: {{beer.description}}</li>
+        <li>Alcohol By Volume:  {{beer.abv}}</li>
+        <li>International Bitterness Units: {{beer.ibu}}</li>
+        <li>Description:  {{beer.description}}</li>
+        <li>Style:  {{beer.style}}</li>
+        <li>Brewery:  {{beer.brewery}}</li>
         <li>Comment: {{beer.comment}}</li>
       </ul>
       <button ng-click='userCtrl.removeBeer(beer.name)'>Delete</button>
