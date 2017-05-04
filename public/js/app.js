@@ -51,18 +51,17 @@ app.controller('MainController', ['$http', function($http){
       this.showBreweryPage = false;
       this.showBreweries = false;
    };
-   this.openThisBrewery = function(results, breweryCtrl){
-      // console.log(breweryCtrl);
-      // console.log(results.brewery);
-      this.showBeerPage = false;
-      this.showBrewerySearch = false;
-      this.showBreweryPage = true;
-      console.log(this.showBeerPage, this.showBrewerySearch, this.showBreweryPage, this.showBreweries);
-      breweryCtrl.currentBrewery1 = results;
-      console.log(breweryCtrl.currentBrewery1, 'openThisBrewery');
 
-      //enlarge selected brewery and add data
+   this.openThisBrewery = function(results, breweryCtrl){
+      this.showHomePage = false;
+      this.showBrewerySearch = false;
+      this.showLoginForm = false;
+      this.showBeerPage = false;
+      this.showBreweryPage = true;
+      this.showBreweries = true;
+      breweryCtrl.currentBrewery1 = results;
    };
+
    this.fromBeerToBrewery = function(name) {
      var urlStr = 'breweries/proxy/v2/breweries?name=' + name;
      var controller = this;
