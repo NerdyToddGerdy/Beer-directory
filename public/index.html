@@ -81,7 +81,6 @@
       Start:<input type="text" placeholder="type your address" ng-model="breweryCtrl.startPoint">
       End:<input ng-show="breweryCtrl.showDirectionOption"type="text" ng-model="breweryCtrl.destination">
       <input ng-show="breweryCtrl.showDirectionOption"type="submit" value="submit" ng-click="breweryCtrl.setCurrentUserDirection() ; map.submit()">
-       <!-- ng-click='breweryCtrl.setCurrentUserDirection()' -->
     </section>
        <!-- End show map option  -->
     <section>
@@ -98,7 +97,6 @@
     <ng-include src="'./partials/beers.html'"></ng-include>
   </section>
   <!-- LOGIN PAGE -->
-  <!-- <section ng-show="main.showLoginForm" > -->
   <section ng-show="main.showLoginForm" >
 
     <div ng-controller="UserController as userCtrl" >
@@ -127,16 +125,8 @@
       </div>
     </div>
   </section>
-  <!-- map section -->
   <section>
-    <!-- <div  class='row' id='map-container'>
-    <div id="map_panel" ></div>
-    <div id="directions_panel"></div>
-  </div>
-</div> -->
 </section>
-
-
 <section class="footer">
   <footer>
     <!-- NEED TO STATE THAT WE ARE USING THE API -->
