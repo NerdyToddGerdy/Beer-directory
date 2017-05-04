@@ -27,7 +27,8 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
         description: data[i].description,
         style: data[i].style.shortName,
         abv: data[i].abv,
-        ibu: data[i].ibu
+        ibu: data[i].ibu,
+        brewery: this.searchByBrewery
       }
       controller.beers.push(newBeer);
     }
@@ -37,6 +38,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
   // Search by name has priority over search by brewery
   this.findBeer = function() {
     if (this.searchForBeer !== "") {
+      this.searchByBrewery = ""
       this.getBeerByName();
     } else if (this.searchByBrewery !== "") {
       this.getBeersByBrewery();
