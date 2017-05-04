@@ -75,19 +75,19 @@
             <h3>Phone Number: {{breweryCtrl.currentBrewery1.phone}}</h3>
             <!-- NEED TO ADD A CONTROLLER -->
             <button ng-click="">Add To Favorites</button>
-            <button ng-click="main.openBrewerySearch()">Back to Breweries</button>
+            <button ng-click="main.openBrewerySearch()">Back to Breweries</button><br>
+            <button ng-click="beerCtrl.getBreweryBeers(breweryCtrl.currentBrewery1.breweryId, main)">Show beers</button>
+            <button ng-click="breweryCtrl.getBreweryLocation(breweryCtrl.currentBrewery1)">Show Direction</button>
           </div>
 
           <!-- Show BEERS ON PAGE -->
-          <div ng-click="beerCtrl.getBreweryBeers(breweryCtrl.currentBrewery1.breweryId, main)">
-            Show beers
-          </div>
-          <ul ng-repeat="beer in beerCtrl.beers">
-            <!-- <li ng-click="goToThisBeer({{breweryCtrl.currentBrewery1.breweryId}}, main)">{{beer.name}}</li> -->
-            <li>{{beer.name}}</li>
-          </ul>
+          <!-- <div > -->
+          <!-- </div> -->
           <div class="">
-             <button ng-click="breweryCtrl.getBreweryLocation(breweryCtrl.currentBrewery1)">Show Direction</button>
+             <ul ng-repeat="beer in beerCtrl.beers">
+                <!-- <li ng-click="goToThisBeer({{breweryCtrl.currentBrewery1.breweryId}}, main)">{{beer.name}}</li> -->
+                <li>{{beer.name}}</li>
+             </ul>
           </div>
         </section>
         <!-- show direction option : An Nguyen Added-->
