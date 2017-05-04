@@ -1,6 +1,7 @@
 
-  <div >
-    <ul>
+<div >
+  Welcome {{userCtrl.userName}}
+  <ul>
     <li ng-repeat="beer in userCtrl.currentUser.beers track by $index">
       <ul>
         <li>Name: {{beer.name}}</li>
@@ -9,10 +10,8 @@
       </ul>
       <button ng-click='userCtrl.removeBeer(beer.name)'>Delete</button>
       <button ng-click ="userCtrl.showEdit($index)"> Add comment</button>
-
-
       <textarea ng-show="userCtrl.editableBeerIndex == $index" cols="80" ng-model ="userCtrl.comment"placeholder="type your comment"></textarea>
       <button ng-show ="userCtrl.editableBeerIndex == $index" ng-click='userCtrl.saveComment(beer)'>Save</button>
     </ul>
-
+    <button ng-click='userCtrl.logout()'type="button" name="button">Log out</button>
 </div>
