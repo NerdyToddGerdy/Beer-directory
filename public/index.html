@@ -80,9 +80,10 @@
     <section class="breweryShowSection" ng-show="breweryCtrl.showDirectionOption" ng-controller="BreweryMap as map">
       Start:<input type="text" placeholder="type your address" ng-model="breweryCtrl.startPoint">
       End:<input ng-show="breweryCtrl.showDirectionOption"type="text" ng-model="breweryCtrl.destination">
-      <input ng-show="breweryCtrl.showDirectionOption"type="submit" value="submit" ng-click="breweryCtrl.setCurrentUserDirection() ; map.submit()">
+      <input ng-show="breweryCtrl.showDirectionOption"type="submit" value="submit">
     </section>
        <!-- End show map option  -->
+       <!-- Display map: An Nguyen Added-->
     <section>
       <div  class='row' id='map-container'>
        <div id="map_panel" ></div>
@@ -125,8 +126,10 @@
       </div>
     </div>
   </section>
+  <!-- map section -->
   <section>
 </section>
+
 <section class="footer">
   <footer>
     <!-- NEED TO STATE THAT WE ARE USING THE API -->
