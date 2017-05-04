@@ -24,6 +24,8 @@
       <ul>
         <li ng-repeat="beer in beerCtrl.beers">
           <p ng-click="displayCtrl.showDetails(beerCtrl, beer)">{{beer.name}}</p>
+          <p ng-click="displayCtrl.showDetails(beerCtrl, beer)">{{beer.brewery}}</p>
+          
         </li>
       </ul>
     </div>
