@@ -64,6 +64,7 @@ angular.module('BreweryApp').controller('BeerDBController', ['$http', function($
 
       controller.addFoundBeersToList(response.data.data);
       controller.getBreweryByBeerID(response.data.data[0].id);
+      console.log(controller.beers);
     }, function(response) {
       console.log("Get beer by name failed", response);
       controller.beers = [];
