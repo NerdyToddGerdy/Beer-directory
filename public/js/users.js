@@ -2,13 +2,15 @@
 angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$window",  function($http, $cookies, $window){
   this.currentUser = {};
   var controller = this;
+  this.initialLoginForms  = true;
   controller.showGreeting = false;
   this.userName ="";
   this.password ="";
   this.showRegisterForm = false;
   this.showLoginForm = true;
   this.isAdmin =false;
-
+  this.logInSuccess = false;
+  this.showEdit = false
   this.addUser = function(){
     console.log('add user');
     $http({
@@ -47,13 +49,17 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
       else {
         // copy loggedin user's info
         for(var i in response.data.currentuser) currentUser[i]=response.data.currentuser[i];
-        console.log("Global currentUser", currentUser);
-        controller.userName = currentUser.username
+        for(var ii in response.data.currentuser) controller.currentUser[ii]=response.data.currentuser[i];
+        console.log("local currentUser", controller.currentUser);
+        this.logInSuccess = true;
+        controller.userName = currentUser.username;
         $cookies.put('logInSuccess', true);
         $cookies.put("username", response.data.currentuser.username);// set cookies username
         $cookies.put("showGreeting", true);
         $cookies.put("pwd", pwd); // set pwd for cookies
         controller.showGreeting = true;
+        this.initialLoginForms = true;
+        $cookies.put("initialLoginForms",   this.initialLoginForms);
         $cookies.putObject('globals', currentUser)
       }
     }, function(error){ //fail
@@ -102,7 +108,64 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     controller.showRegisterForm = !controller.showRegisterForm;
     controller.showLoginForm = !controller.showLoginForm;
   }
+  //------------------------------------------------------
+  this.removeBeer = function (removeBeerName){
+    var urlStr = '/users/beers/update/' + currentUser._id;
+    var _beers = currentUser.beers;
+    for (var i = 0; i < _beers. length; i ++){
+      if (_beers[i].name === removeBeerName){
+        _beers.splice(i,1);
+        break;
+      }
+    }
+    $http({
+      method: 'PUT',
+      url: urlStr,
+      data: {beers:  _beers }
+    }).then(function(response) {
+      console.log("beer is removed");
+    }, function(response) {
+      console.log("failed to delete beer", response);
+    })
+  }
+  //----------------------------------------------------------
 
+  this.showEdit = function($index){
+    console.log("this is index", $index);
+    this.editableBeerIndex = $index;
+  }
+
+  this.saveComment = function (editBeer){
+    //reset controll
+    this.editableBeerIndex = -1;
+    console.log("edit :", editBeer);
+    var urlStr = '/users/beers/update/' + currentUser._id;
+    var _beers = currentUser.beers;
+    for (var i = 0; i < _beers. length; i ++){
+      if (_beers[i].name === editBeer.name){
+        _beers[i].comment = this.comment
+        console.log("After add comment:  " ,_beers[i]);
+        break;
+      }
+    }
+    currentUser.beers = [];
+    currentUser.beers = _beers;
+    console.log(_beers, currentUser);
+    $http({
+      method: 'PUT',
+      url: urlStr,
+      data: {beers:  _beers }
+    }).then(function(response) {
+      this.editableBeerIndex = null;
+
+      console.log("beer is updated");
+    }, function(response) {
+      console.log("failed to update beer", response);
+    });
+    this.comment = "";
+  }
+
+  //------------------------------------------------------
   //set cookie section
   if ($cookies.get('logInSuccess')){
     console.log("it is run again??");
@@ -110,9 +173,11 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     this.userName = $cookies.get("username");
     this.password = $cookies.get("pwd");
     this.showGreeting = $cookies.get("showGreeting");
+    //this.initialLoginForms = $cookies.get("initialLoginForms");
+    this.showLoginForm = false;
+    console.log("this.initialLoginForms :", this.initialLoginForms);
     console.log( "show greeting ",  $cookies.get("showGreeting"));
     this.logIn();
   }
-
 
 }]); // end of user controller

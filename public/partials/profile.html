@@ -1,0 +1,23 @@
+
+<div >
+  <h4>Welcome {{userCtrl.userName}}</h4>
+ <p>List of your favorite beers:</p>
+  <ul>
+    <li ng-repeat="beer in userCtrl.currentUser.beers track by $index">
+      <ul>
+        <li>Name: {{beer.name}}</li>
+        <li>Alcohol By Volume:  {{beer.abv}}</li>
+        <li>International Bitterness Units: {{beer.ibu}}</li>
+        <li>Description:  {{beer.description}}</li>
+        <li>Style:  {{beer.style}}</li>
+        <li>Brewery:  {{beer.brewery}}</li>
+        <li>Comment: {{beer.comment}}</li>
+      </ul>
+      <button ng-click='userCtrl.removeBeer(beer.name)'>Delete</button>
+      <button ng-click ="userCtrl.showEdit($index)"> Add/Edit comment</button>
+      <textarea ng-show="userCtrl.editableBeerIndex == $index" cols="80" ng-model ="userCtrl.comment"placeholder="type your comment"></textarea>
+      <button ng-show ="userCtrl.editableBeerIndex == $index" ng-click='userCtrl.saveComment(beer)'>Save</button>
+      <br><br>
+    </ul>
+    <button ng-click='userCtrl.logout()'type="button" name="button">Log out</button>
+</div>
