@@ -1,10 +1,36 @@
-# Beer-directory
-A directory in which you can search for beers and breweries.
+# Brews Near You
+## Brief Description
+A directory in which you can search for beers and breweries.  You also will be able to save your favorite breweries and beers.
 
-Repository: https://github.com/Toadilicious/Beer-directory
+## Live Site
+https://beers-near-you.herokuapp.com/
 
-Live website: https://beers-near-you.herokuapp.com/
+## Repository
+https://github.com/Toadilicious/Beer-directory
 
-Brewery and beer data is from http://www.brewerydb.com/.
+## Technologies Used
+- express
+- express-http-proxy
+- AngularJS
+- SASS
+- CSS3
+- HTML
+- NPM
+- Mongoose
+- Node.Js
+- Google maps
+- Third Party API
 
-Technologies: express, express-http-proxy, angular, SASS,
+## External Sources
+Animations are from animate.css - http://daneden.me/animate
+Brewery and beer data is from brewerydb - http://www.brewerydb.com
+Google Maps data was provided by Google Maps - http://maps.google.com/maps/api/js
+
+## Unsolved Problems
+- The Style doesn't work well in Firefox.
+- 
+
+
+## Expected Updates
+- We are going to make it responsive to mobile
+-
