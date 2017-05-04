@@ -1,12 +1,6 @@
-console.clear();
-// var app = angular.module('BreweryApp', ['ngCookies']);
-
-// User Registration controller
-// angular.module('BreweryApp').controller('BreweryDBController', ['$http', function($http) {
-// app.controller('UserController', ['$http', '$cookies', '$window',function($http, $cookies, $window){
 
 angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$window",  function($http, $cookies, $window){
-
+  this.currentUser = {};
   var controller = this;
   controller.showGreeting = false;
   this.userName ="";
@@ -32,7 +26,6 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     this.registerUserName = "";
     this.registerPassword = "";
     this.isAdmin  = false;
-
   };
   // log in section
   this.logIn = function(){
@@ -52,12 +45,16 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
         $window.location.reload();
       }
       else {
-        controller.currentUser = response.data.currentuser; // get currrent user information
+        // copy loggedin user's info
+        for(var i in response.data.currentuser) currentUser[i]=response.data.currentuser[i];
+        console.log("Global currentUser", currentUser);
+        controller.userName = currentUser.username
         $cookies.put('logInSuccess', true);
         $cookies.put("username", response.data.currentuser.username);// set cookies username
         $cookies.put("showGreeting", true);
         $cookies.put("pwd", pwd); // set pwd for cookies
         controller.showGreeting = true;
+        $cookies.putObject('globals', currentUser)
       }
     }, function(error){ //fail
       console.log("wrong user name or password");
@@ -74,6 +71,8 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     $cookies.remove('pwd');
     $cookies.remove('showGreeting');
     $cookies.remove('logInSuccess');
+    $cookies.remove("showLoginForm");
+    $cookies.remove('globals')
     $http({
       method:'POST',
       url:'/sessions?_method=DELETE',
@@ -97,7 +96,6 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
   this.resetRegisterForm = function (){
     controller.showRegisterForm = !controller.showRegisterForm;
     controller.showLoginForm = !controller.showLoginForm;
-
   }
 
   this.resetLoginForm = function(){

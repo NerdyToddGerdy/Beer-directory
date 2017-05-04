@@ -1,62 +1,5 @@
 
-
-console.clear();
-var app = angular.module('MyApp', []);
-
-// User Registration controller
-app.controller('UserController', ['$http', function($http){
-  this.showRegisterForm = false;
-  this.showLoginForm = false;
-  this.isAdmin =false;
-  this.addUser = function(){
-    // console.log('add user');
-        $http({
-            method:'POST',
-            url:'/users',
-            data: {
-                username: this.userName,
-                password: this.password,
-                isAdmin: this.isAdmin
-            }
-        }).then(function(response){ //success
-            console.log("this is respnse " , response);
-        }, function(error){ //fail
-            console.log("angualr: err " , error);
-            alert('The user name is already taken');
-        });
-        this.userName = "";
-        this.password = "";
-        this.isAdmin  = false;
-
-    };
-
-// log in section
-
- // login method
- this.logIn = function(){
-  //  console.log("Log in as : ", this.userName);
-   $http({
-       method:'POST',
-       url:'/sessions',
-       data: {
-           username: this.userName,
-           password: this.password,
-       }
-   }).then(function(response){ //success
-       console.log(response.data);
-   }, function(error){ //fail
-        console.log("wrong user name or password");
-        alert("wrong user name or password")
-   });
-   this.userName = "";
-   this.password = "";
- };
-
-
-
-}]); // end of user controller
-
-var app = angular.module('BreweryApp', ['ngAnimate']);
+var app = angular.module('BreweryApp', ['ngAnimate', 'ngCookies']);
 
 app.controller('MainController', ['$http', function($http){
    this.showBrewerySearch = false;
@@ -64,6 +7,7 @@ app.controller('MainController', ['$http', function($http){
    this.showBeerPage = false;
    this.isAdmin =false;
    this.currentBrewery = false;
+   this.controller = this;
    this.getBreweries = function(brew){
       console.log(brew);
       $http({
@@ -73,8 +17,6 @@ app.controller('MainController', ['$http', function($http){
          console.log(response);
       });
    };
-
-
    this.openHomePage = function(){
       this.showHomePage = true;
       this.showBrewerySearch = false;
@@ -90,6 +32,7 @@ app.controller('MainController', ['$http', function($http){
       this.showBeerPage = false;
       this.showBreweryPage = false;
       this.showBreweries = true;
+      console.log('currentUser in app.js: ', currentUser);  // testing purpose
    };
    this.openBeerSearch = function(){
       this.showHomePage = false;
@@ -98,6 +41,7 @@ app.controller('MainController', ['$http', function($http){
       this.showBeerPage = true;
       this.showBreweryPage = false;
       this.showBreweries = false;
+      console.log('currentUser in app.js: ', currentUser);  // testing purpose
    };
    this.openLoginPage = function(){
       this.showBrewerySearch = false;
@@ -107,14 +51,28 @@ app.controller('MainController', ['$http', function($http){
       this.showBreweryPage = false;
       this.showBreweries = false;
    };
-   this.openThisBrewery = function(results, breweryCtrl){
-      // console.log(breweryCtrl);
-      // console.log(results.brewery);
-      this.showBrewerySearch = false;
-      this.showBreweryPage = true;
-      breweryCtrl.currentBrewery1 = results;
-      console.log(breweryCtrl.currentBrewery1);
 
-      //enlarge selected brewery and add data
+   this.openThisBrewery = function(results, breweryCtrl){
+      this.showHomePage = false;
+      this.showBrewerySearch = false;
+      this.showLoginForm = false;
+      this.showBeerPage = false;
+      this.showBreweryPage = true;
+      this.showBreweries = true;
+      breweryCtrl.currentBrewery1 = results;
+   };
+
+   this.fromBeerToBrewery = function(name) {
+     var urlStr = 'breweries/proxy/v2/breweries?name=' + name;
+     var controller = this;
+     $http({
+      method: 'GET',
+      url: urlStr
+     }).then( function(response) {
+      controller.brewery = response.data.data[0].name;
+      console.log(controller.breweries);
+     }, function(response) {
+      console.log("fromBeerToBrewery failed:", response);
+     });
    };
 }]);

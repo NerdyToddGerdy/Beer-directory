@@ -1,6 +1,6 @@
 
 
-<div ng-controller="BeerDBController as beerCtrl">
+<div>
 
   <!-- beer page -->
   <div ng-controller="BeerDisplayController as displayCtrl">
@@ -31,13 +31,12 @@
     <!-- beer details form -->
     <div ng-show="displayCtrl.showDetailsForm">
       <h3>{{beerCtrl.selectedBeer.name}} - {{beerCtrl.selectedBeer.style}}</h3>
-      Brewery: {{beerCtrl.selectedBeer.brewery}}<br>
+      <h4 ng-click="breweryCtrl.getBreweryByName(beerCtrl.selectedBeer.brewery, breweryCtrl, main)">  Brewery: {{beerCtrl.selectedBeer.brewery}}</h4><br>
       ABV: {{beerCtrl.selectedBeer.abv}}<br>
       IBU: {{beerCtrl.selectedBeer.ibu}}<br>
       {{beerCtrl.selectedBeer.description}}
 
-      <!-- TODO: Add click to button -->
-      <button ng-click="">Add To Favorites</button>
+      <button ng-show="displayCtrl.showAddFavButton" ng-click="beerCtrl.saveFavoriteBeer()">Add To Favorites</button>
       <button ng-click="displayCtrl.backToSearchForm()">Back To Search</button>
     </div>
   </div>
