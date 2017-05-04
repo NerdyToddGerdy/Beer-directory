@@ -108,63 +108,62 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     controller.showRegisterForm = !controller.showRegisterForm;
     controller.showLoginForm = !controller.showLoginForm;
   }
-//------------------------------------------------------
-this.removeBeer = function (removeBeerName){
-  var urlStr = '/users/beers/update/' + currentUser._id;
-  var _beers = currentUser.beers;
-  for (var i = 0; i < _beers. length; i ++){
-    if (_beers[i].name === removeBeerName){
-      _beers.splice(i,1);
-      break;
+  //------------------------------------------------------
+  this.removeBeer = function (removeBeerName){
+    var urlStr = '/users/beers/update/' + currentUser._id;
+    var _beers = currentUser.beers;
+    for (var i = 0; i < _beers. length; i ++){
+      if (_beers[i].name === removeBeerName){
+        _beers.splice(i,1);
+        break;
+      }
     }
+    $http({
+      method: 'PUT',
+      url: urlStr,
+      data: {beers:  _beers }
+    }).then(function(response) {
+      console.log("beer is removed");
+    }, function(response) {
+      console.log("failed to delete beer", response);
+    })
   }
-   $http({
-     method: 'PUT',
-     url: urlStr,
-     data: {beers:  _beers }
-   }).then(function(response) {
-     console.log("beer is removed");
-   }, function(response) {
-     console.log("failed to delete beer", response);
-   })
-}
-//----------------------------------------------------------
+  //----------------------------------------------------------
 
-this.showEdit = function($index){
-  console.log("this is index", $index);
- this.editableBeerIndex = $index;
+  this.showEdit = function($index){
+    console.log("this is index", $index);
+    this.editableBeerIndex = $index;
+  }
 
-}
-this.saveComment = function (editBeer){
-  //reset controll
-
-this.editableBeerIndex = -1;
- console.log("edit :", editBeer);
-  var urlStr = '/users/beers/update/' + currentUser._id;
-   var _beers = currentUser.beers;
-   for (var i = 0; i < _beers. length; i ++){
-     if (_beers[i].name === editBeer.name){
+  this.saveComment = function (editBeer){
+    //reset controll
+    this.editableBeerIndex = -1;
+    console.log("edit :", editBeer);
+    var urlStr = '/users/beers/update/' + currentUser._id;
+    var _beers = currentUser.beers;
+    for (var i = 0; i < _beers. length; i ++){
+      if (_beers[i].name === editBeer.name){
         _beers[i].comment = this.comment
         console.log("After add comment:  " ,_beers[i]);
-       break;
-     }
-   }
-   currentUser.beers = [];
-   currentUser.beers = _beers;
-console.log(_beers, currentUser);
-$http({
-  method: 'PUT',
-  url: urlStr,
-  data: {beers:  _beers }
-}).then(function(response) {
-  this.editableBeerIndex = null;
+        break;
+      }
+    }
+    currentUser.beers = [];
+    currentUser.beers = _beers;
+    console.log(_beers, currentUser);
+    $http({
+      method: 'PUT',
+      url: urlStr,
+      data: {beers:  _beers }
+    }).then(function(response) {
+      this.editableBeerIndex = null;
 
-  console.log("beer is updated");
-}, function(response) {
-  console.log("failed to delete beer", response);
-});
-this.comment = "";
-}
+      console.log("beer is updated");
+    }, function(response) {
+      console.log("failed to delete beer", response);
+    });
+    this.comment = "";
+  }
 
   //------------------------------------------------------
   //set cookie section
@@ -180,7 +179,5 @@ this.comment = "";
     console.log( "show greeting ",  $cookies.get("showGreeting"));
     this.logIn();
   }
-
-
 
 }]); // end of user controller

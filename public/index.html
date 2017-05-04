@@ -27,7 +27,7 @@
         <li ng-click="main.openHomePage()">home</li>
         <li ng-click="main.openBrewerySearch()">breweries</li>
         <li ng-click="main.openBeerSearch()">beers</li>
-        <li ng-click="main.openLoginPage()">log in</li>
+        <li ng-click="main.openLoginPage()">log in/profile</li>
       </ul>
     </nav>
   </header>
@@ -74,6 +74,22 @@
       <h3><a href="{{breweryCtrl.currentBrewery1.website}}">{{breweryCtrl.currentBrewery1.website}}</a></h3>
       <h3>Phone Number: {{breweryCtrl.currentBrewery1.phone}}</h3>
       <button ng-click="main.openBrewerySearch()">Back to Breweries</button>
+      <button ng-click="breweryCtrl.getBreweryLocation(breweryCtrl.currentBrewery1)">Show Direction</button>
+    </section>
+      <!-- show direction option : An Nguyen Added-->
+    <section class="breweryShowSection" ng-show="breweryCtrl.showDirectionOption" ng-controller="BreweryMap as map">
+      Start:<input type="text" placeholder="type your address" ng-model="breweryCtrl.startPoint">
+      End:<input ng-show="breweryCtrl.showDirectionOption"type="text" ng-model="breweryCtrl.destination">
+      <input ng-show="breweryCtrl.showDirectionOption"type="submit" value="submit" ng-click="breweryCtrl.setCurrentUserDirection() ; map.submit()">
+       <!-- ng-click='breweryCtrl.setCurrentUserDirection()' -->
+    </section>
+       <!-- End show map option  -->
+    <section>
+      <div  class='row' id='map-container'>
+       <div id="map_panel" ></div>
+       <div id="directions_panel"></div>
+      </div>
+      </div>
     </section>
   </section>
 
@@ -86,29 +102,26 @@
   <section ng-show="main.showLoginForm" >
 
     <div ng-controller="UserController as userCtrl" >
-      <div ng-show ="userCtrl.initialLoginForms">
-        <div ng-show='userCtrl.showLoginForm'>
-          <h3>Log In</h3>
-          <form ng-submit='userCtrl.logIn()'>
-            <input  ng-model ="userCtrl.userName" placeholder="username"><br>
-            <input  ng-model ="userCtrl.password"  type='password' placeholder="password"><br>
-            <input  type='submit' ng-click ="userCtrl.showLoginForm = !userCtrl.showLoginForm " name="login" value="Log in">
-          </form>
-        </div>
-        <li ng-show="userCtrl.showLoginForm ">
-          <a href="#" ng-click="userCtrl.resetLoginForm()">Register</a>
-        </li>
-        <div ng-show="userCtrl.showRegisterForm">
-          <form ng-submit='userCtrl.addUser()'>
-            <input  ng-model ="userCtrl.registerUserName" placeholder="user name"><br>
-            <input  ng-model ="userCtrl.registerPassword" type='password'placeholder="password"><br>
-            <input type='submit' ng-click ="userCtrl.resetRegisterForm()"name="register" value='Register'>
-          </form>
-        </div>
-      </div>
-
-
-
+  <div ng-show ="0">
+    <div ng-show='userCtrl.showLoginForm'>
+      <h3>Log In</h3>
+      <form ng-submit='userCtrl.logIn()'>
+        <input  ng-model ="userCtrl.userName" placeholder="username"><br>
+        <input  ng-model ="userCtrl.password"  type='password' placeholder="password"><br>
+        <input  type='submit' ng-click ="userCtrl.showLoginForm = !userCtrl.showLoginForm " name="login" value="Log in">
+      </form>
+    </div>
+    <li ng-show="userCtrl.showLoginForm ">
+      <a href="#" ng-click="userCtrl.resetLoginForm()">Register</a>
+    </li>
+    <div ng-show="userCtrl.showRegisterForm">
+      <form ng-submit='userCtrl.addUser()'>
+        <input  ng-model ="userCtrl.registerUserName" placeholder="user name"><br>
+        <input  ng-model ="userCtrl.registerPassword" type='password'placeholder="password"><br>
+        <input type='submit' ng-click ="userCtrl.resetRegisterForm()"name="register" value='Register'>
+      </form>
+    </div>
+  </div>
       <div ng-show='userCtrl.showGreeting'>
         <ng-include src="'./partials/profile.html'"></ng-include>
       </div>

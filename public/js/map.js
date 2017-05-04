@@ -1,46 +1,11 @@
 angular.module('BreweryApp').controller('BreweryMap', ['$http', function($http) {
-
-  ///////// driving mapp section setup
-  // <!-- html -->
-  // <div  class='row' id='map-container'>
-  //  <div id="map_panel" ></div>
-  //  <div id="directions_panel"></div>
-  // </div>
-  // </div>
-
-  /*simple css for direction map for testing */
-  // #map-container{
-  //   width:  70%;
-  //   height: auto;
-  // }
-  // #map_panel{
-  //   width: 50%;
-  //   height: 500px;
-  //   float: left;
-  // }
-  // #directions_panel{
-  //   width: 45%;
-  //   float: right;
-  // }
-  //----------------------------------
-  this.showStartInputText = false;     //  this control is used to show and hide startpoint input text box
-  // show text box for starting point
-  this.displayStartPointTextBox = function(destination/* brewery's address */){
-    this.showStartInputText = !this.showStartInputText ;
-    console.log("destination", destination);
-    this.destination = destination;  // set destination
-  }
-
   // This function will take starting address, and ending address to show routes by using google-driving-mode map
   //http://stackoverflow.com/questions/3896871/
   this.submit = function (){
-    console.log('starting: ', this.startPoint);
-    console.log('ending: ', this.destination);
-    //this.startPoint: user typed in address
-    //this.destination: brewery's address
-    //drivingMap("1110 N Glebe Rd, Arlington, VA 22201, USA", "2000 Elden St #100, Herndon, VA 20170, USA"); //testing 
-    drivingMap(this.startPoint, this.destination);
-    this.startPoint =""; // reset starting point
+    console.log('starting: ', currentUserDirection.start);
+    console.log('ending: ', currentUserDirection.end);
+    drivingMap(currentUserDirection.start, currentUserDirection.end);
+    currentUserDirection = {};
   }
 }]);
 
