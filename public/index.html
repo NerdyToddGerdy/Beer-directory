@@ -86,7 +86,9 @@
             <!-- <li ng-click="goToThisBeer({{breweryCtrl.currentBrewery1.breweryId}}, main)">{{beer.name}}</li> -->
             <li>{{beer.name}}</li>
           </ul>
-          <button ng-click="breweryCtrl.getBreweryLocation(breweryCtrl.currentBrewery1)">Show Direction</button>
+          <div class="">
+             <button ng-click="breweryCtrl.getBreweryLocation(breweryCtrl.currentBrewery1)">Show Direction</button>
+          </div>
         </section>
         <!-- show direction option : An Nguyen Added-->
         <section class="breweryShowSection" ng-show="breweryCtrl.showDirectionOption" ng-controller="BreweryMap as map">
