@@ -58,7 +58,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
         $cookies.put("showGreeting", true);
         $cookies.put("pwd", pwd); // set pwd for cookies
         controller.showGreeting = true;
-        this.initialLoginForms = false;
+        this.initialLoginForms = true;
         $cookies.put("initialLoginForms",   this.initialLoginForms);
         $cookies.putObject('globals', currentUser)
       }
@@ -160,7 +160,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
 
       console.log("beer is updated");
     }, function(response) {
-      console.log("failed to delete beer", response);
+      console.log("failed to update beer", response);
     });
     this.comment = "";
   }
@@ -173,7 +173,7 @@ angular.module('BreweryApp').controller('UserController',['$http', '$cookies',"$
     this.userName = $cookies.get("username");
     this.password = $cookies.get("pwd");
     this.showGreeting = $cookies.get("showGreeting");
-    this.initialLoginForms = $cookies.get("initialLoginForms");
+    //this.initialLoginForms = $cookies.get("initialLoginForms");
     this.showLoginForm = false;
     console.log("this.initialLoginForms :", this.initialLoginForms);
     console.log( "show greeting ",  $cookies.get("showGreeting"));
