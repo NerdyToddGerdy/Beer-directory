@@ -152,6 +152,7 @@ angular.module('BreweryApp').controller('BreweryDBController', ['$http', functio
   this.showDirectionOption = false;
   this.startPoint = "";
   this.getBreweryLocation = function(addressObj){
+    this.turnOnMap = true;
     this.showDirectionOption = true;
     this.destination = addressObj.streetAddress + " " + addressObj.region + " " + addressObj.postalCode;
   }
