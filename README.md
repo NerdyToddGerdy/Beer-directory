@@ -26,14 +26,14 @@ https://github.com/Toadilicious/Beer-directory
 - Brewery and beer data is from brewerydb - http://www.brewerydb.com
 - Google Maps data was provided by Google Maps - http://maps.google.com/maps/api/js
 
-## Unsolved Problems
-- The Style doesn't work well in Firefox.
-- The pre-selected beers on the brewery pages do not disappear on the next brewery.
-- using angular globally
-- sessions: needs a little more attention
-
 ## Technical Challenges
 - Using a proxy to fix the CORS error when using a 3rd api.
+- Reading through the API's developer page to understand what data can be received from which URLs
+- Using Session cookie with AngularJS
+
+## Unsolved Problems
+- The Style doesn't work well in Firefox with the maps
+- the site is not currently responsive
 
 ## Expected Updates
 - We are going to make it responsive to mobile
@@ -42,6 +42,7 @@ https://github.com/Toadilicious/Beer-directory
 - Add some more CSS animations (see beers, beer page, etc.)
 - Add the ability to search for breweries by city or state.
 - Add BJCP scoresheets to beer detail page.
+- Make comments available to all users
 
 ## Question and answer time
 1. What went well for your group?
