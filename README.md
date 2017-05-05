@@ -3,7 +3,7 @@
 A directory in which you can search for beers and breweries.  You also will be able to save your favorite breweries and beers.
 
 ## Live Site
-https://beers-near-you.herokuapp.com/
+https://brews-near-you.herokuapp.com/
 
 ## Repository
 https://github.com/Toadilicious/Beer-directory
