@@ -20,7 +20,8 @@ body {
     justify-content: space-between;
     flex-direction: row;
     padding: 0 5px;
-    margin: 0; }
+    margin: 0;
+    font-size: 1.5em; }
     body nav ul li {
       list-style: none;
       font-size: 3em;
@@ -45,7 +46,9 @@ body {
     body footer a {
       margin: 0 auto; }
     body footer img {
-      width: 30%; }
+      width: 15%; }
+  body .search {
+    font-size: 1.75em; }
   body .items {
     border: 2px solid black;
     border-radius: 5px;
@@ -88,7 +91,8 @@ body {
     width: 910px; }
   body #map-container {
     width: 910px;
-    height: auto; }
+    height: auto;
+    padding-left: 10%; }
   body #map_panel {
     width: 50%;
     height: 500px;
@@ -103,5 +107,58 @@ body {
     overflow: scroll;
     height: 288px;
     width: 212px; }
+  body .brewery-search {
+    padding: 4% 0 0 10%; }
+  body input {
+    font-size: 1.5em; }
+  body .gif {
+    width: 74%;
+    position: absolute;
+    right: 0%;
+    top: 19%; }
+  body .beer-form {
+    width: 15%; }
+  body .beer-show-page {
+    display: inline; }
+  body .beer-list {
+    list-style: none;
+    margin-left: 8%;
+    font-size: 1.5em; }
+  body .beer-list:hover {
+    color: #a57621; }
+  body .beer-stats {
+    width: 45%;
+    position: absolute;
+    right: 0%;
+    text-align: right;
+    padding: 12% 10% 0 0; }
+  body #beer-stats-img {
+    position: absolute;
+    width: 100%;
+    left: 0; }
+  body .to-brewery:hover {
+    color: #a57621; }
+  body .brewery-search-img {
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: -7%;
+    z-index: -2; }
+  body .login-img {
+    width: 100%;
+    position: absolute;
+    z-index: -2;
+    left: 0;
+    top: 19%; }
+  body .login-font {
+    color: #8a5f18;
+    font-size: 1.25em; }
+  body .login-form {
+    padding: 4% 0 0 6%;
+    list-style: none; }
+  body #reg-button {
+    margin: 0; }
+  body #reg-button:hover {
+    text-decoration: underline; }
 
 /*# sourceMappingURL=main.css.map */
