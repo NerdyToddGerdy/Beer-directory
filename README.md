@@ -48,16 +48,16 @@ https://github.com/Toadilicious/Beer-directory
 1. What went well for your group?
 - T. We were able to split the work fairly evenly.
 - M. Each of us took a technology we weren't familiar with and we came up to speed quickly.
-- A.
+- A. The communication between us
 2. What was your groups biggest struggle?
 - T. Getting everybody to a point where we could all merge at the same time.
 - M. Getting merges to happen conflict free.
-- A.
+- A. Page's elements show/hide control on each event.  Git commit, merge and pull.
 3. What was the most useful tool that your group relied on the most
 - T. Console Logs
 - M. The browser debugger
-- A.
+- A. Browser debugger/inspect 
 4. What was the most surprising aspect of working in a group/a thing (or things) you didn’t anticipate?
 - T. I was amazed at how it all seemed to be jumbled up until the last few days when the pieces of the puzzle just started to combine.
 - M. 
-- A.
+- A. We are all don't drink but we built an app that queries most of available beer in US.  And this time, i can spell Budweiser correctly:)
