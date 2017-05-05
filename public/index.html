@@ -46,9 +46,10 @@
 
       <!-- BREWERIES SEARCH-->
       <section ng-show="main.showBreweries" class="brewery-search" >
+         <img class="brewery-search-img" src="https://static.pexels.com/photos/25655/pexels-photo-25655.jpg" alt="">
         <div class=""  ng-show="main.showBrewerySearch">
           <div class="Search Menu">
-            <h3>Search For A Brewery</h3>
+            <h2>Search For A Brewery</h2>
             <form ng-submit=breweryCtrl.getBreweriesByZip(zipCode)>
               <input type="text" ng-model="zipCode" placeholder="Search by zip code">
               <input type="submit" name="" value="Search">
@@ -74,7 +75,7 @@
             <h3><a href="{{breweryCtrl.currentBrewery1.website}}">{{breweryCtrl.currentBrewery1.website}}</a></h3>
             <h3>Phone Number: {{breweryCtrl.currentBrewery1.phone}}</h3>
             <!-- NEED TO ADD A CONTROLLER -->
-            <button ng-click="">Add To Favorites</button>
+            <!-- <button ng-click="">Add To Favorites</button> -->
             <button ng-click="main.openBrewerySearch()">Back to Breweries</button><br>
             <button ng-click="beerCtrl.beers=[]; beerCtrl.getBreweryBeers(breweryCtrl.currentBrewery1.breweryId, main)">Show beers</button>
             <button ng-click="breweryCtrl.getBreweryLocation(breweryCtrl.currentBrewery1)">Show Direction</button>
@@ -113,8 +114,9 @@
     </section>
 
     <!-- LOGIN PAGE -->
-    <section ng-show="main.showLoginForm" >
-      <div ng-controller="UserController as userCtrl" >
+    <section class="login-form" ng-show="main.showLoginForm" >
+      <img class="login-img" src="https://static.pexels.com/photos/27892/pexels-photo-27892.jpg" alt="">
+      <div class="login-font" ng-controller="UserController as userCtrl" >
         <div ng-show ="1">
           <div ng-show='userCtrl.showLoginForm'>
             <h3>Log In</h3>
@@ -125,7 +127,7 @@
             </form>
           </div>
           <li ng-show="userCtrl.showLoginForm ">
-            <a href="#" ng-click="userCtrl.resetLoginForm()">Register</a>
+            <p id="reg-button" ng-click="userCtrl.resetLoginForm()">Register</p>
           </li>
           <div ng-show="userCtrl.showRegisterForm">
             <form ng-submit='userCtrl.addUser()'>
