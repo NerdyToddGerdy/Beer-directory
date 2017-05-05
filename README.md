@@ -22,9 +22,9 @@ https://github.com/Toadilicious/Beer-directory
 - Third Party API
 
 ## External Sources
-Animations are from animate.css - http://daneden.me/animate
-Brewery and beer data is from brewerydb - http://www.brewerydb.com
-Google Maps data was provided by Google Maps - http://maps.google.com/maps/api/js
+- Animations are from animate.css - http://daneden.me/animate
+- Brewery and beer data is from brewerydb - http://www.brewerydb.com
+- Google Maps data was provided by Google Maps - http://maps.google.com/maps/api/js
 
 ## Unsolved Problems
 - The Style doesn't work well in Firefox.
