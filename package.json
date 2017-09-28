@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,8 @@
     "express-http-proxy": "^1.0.1",
     "express-session": "^1.15.2",
     "method-override": "^2.3.8",
-    "mongoose": "^4.9.6"
-  }
+    "mongoose": "^4.9.6",
+    "snyk": "^1.41.1"
+  },
+  "snyk": true
 }
